@@ -1,0 +1,72 @@
+{
+    "intents": [
+        {
+            "tag": "request_data",
+            "patterns": [
+                "Who is mozzart",
+                "What do you know about Method Man",
+                "Who is the most successful musician",
+                "Can you tell me more about the life of Freddie Mercury?",
+                "What are some of the biggest hits from Michael Jackson?",
+                "Who is the lead guitarist of Guns N' Roses?",
+                "What was the first album released by Led Zeppelin?",
+                "Can you provide me with information about the origins of hip hop?",
+                "What is the most popular genre of music in the United States?",
+                "Who was the first female rapper to win a Grammy award?",
+                "What was the name of Prince's backup band?",
+                "What inspired the Beatles to write 'Let It Be'?",
+                "Can you tell me more about the history of the Rolling Stones?",
+                "Tell me about Pink Floyd's Dark Side of the Moon album",
+                "What is the story behind Michael Jackson's Thriller song?",
+                "Can you give me some information about Johann Sebastian Bach?",
+                "Tell me about Pink Floyd's Dark Side of the Moon album",
+                "What is the story behind Michael Jackson's Thriller song?"
+            ]
+        },
+        {
+            "tag": "play_specific_song",
+            "patterns": [
+                "Play eminem not afraid",
+                "Method man gotta have it",
+                "Play some ac/dc hits",
+                "Hi, give me an Led Zeppelin song",
+                "Play Michale Jackson Thriller",
+                "Can you play Bohemian Rhapsody by Queen?",
+                "I want to listen to 'Stairway to Heaven' by Led Zeppelin.",
+                "Play 'Shape of You' by Ed Sheeran.",
+                "Give me some rolling stones hits"
+            ]
+        },
+        {
+            "tag": "play_specific_genre",
+            "patterns": [
+                "Can you play a rock song?",
+                "I'm in the mood for some jazz music.",
+                "Can you play some hip hop music?",
+                "Give me some rock hits",
+                "Play some house music",
+                "Hi, can u play some rap",
+                "Give me some rock n roll vibes",
+                "Can u play some rnb",
+                "I want to listen to some dubstep",
+                "I'm in the mood for some classical music."
+            ]
+        },
+        {
+            "tag": "play_random_song",
+            "patterns": [
+                "Play something",
+                "Play some music",
+                "Give me some hits",
+                "Give me a song",
+                "Can u play?"
+            ],
+            "responses": [
+                "Sorry i didin't understand, can you be more specific?",
+                "Sorry, you need to be more specific.",
+                "Im not sure i understood that. :(",
+                "What do you want me to play?"
+            ]
+        }
+    ]
+}
