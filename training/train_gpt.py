@@ -24,18 +24,26 @@ for idx, intent in enumerate(data['intents']):
 #     print(f'Text: {text}\nLabel: {label}\n')
 
 
-train_texts, val_texts, train_labels, val_labels = train_test_split(train_texts, train_labels, test_size=0.2)
+train_texts, val_texts, train_labels, val_labels = train_test_split(
+    train_texts, train_labels, test_size=0.2)
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=len(train_values))
+model = BertForSequenceClassification.from_pretrained(
+    'bert-base-uncased', num_labels=len(train_values))
 
-encoded_train_texts = tokenizer(train_texts, padding=True, truncation=True, return_tensors='pt')
-train_dataset = torch.utils.data.TensorDataset(encoded_train_texts['input_ids'], encoded_train_texts['attention_mask'], torch.tensor(train_labels))
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=16, shuffle=True)
+encoded_train_texts = tokenizer(
+    train_texts, padding=True, truncation=True, return_tensors='pt')
+train_dataset = torch.utils.data.TensorDataset(
+    encoded_train_texts['input_ids'], encoded_train_texts['attention_mask'], torch.tensor(train_labels))
+train_loader = torch.utils.data.DataLoader(
+    train_dataset, batch_size=16, shuffle=True)
 
-encoded_val_texts = tokenizer(val_texts, padding=True, truncation=True, return_tensors='pt')
-val_dataset = torch.utils.data.TensorDataset(encoded_val_texts['input_ids'], encoded_val_texts['attention_mask'], torch.tensor(val_labels))
-val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=16, shuffle=True)
+encoded_val_texts = tokenizer(
+    val_texts, padding=True, truncation=True, return_tensors='pt')
+val_dataset = torch.utils.data.TensorDataset(
+    encoded_val_texts['input_ids'], encoded_val_texts['attention_mask'], torch.tensor(val_labels))
+val_loader = torch.utils.data.DataLoader(
+    val_dataset, batch_size=16, shuffle=True)
 
 # Fine-tune the model on the training data
 optimizer = optim.AdamW(model.parameters(), lr=5e-5)
@@ -68,7 +76,8 @@ for epoch in range(50):
     with torch.no_grad():
         for batch in val_loader:
             input_ids, attention_mask, labels = batch
-            output = model(input_ids, attention_mask=attention_mask, labels=labels)
+            output = model(
+                input_ids, attention_mask=attention_mask, labels=labels)
             loss = output.loss
 
             val_loss += loss.item() * len(labels)
