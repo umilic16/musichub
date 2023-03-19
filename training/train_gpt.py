@@ -41,7 +41,7 @@ val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=16, shuffle=Tru
 optimizer = optim.AdamW(model.parameters(), lr=5e-5)
 model.train()
 
-for epoch in range(30):
+for epoch in range(50):
     # Train the model on the training set
     model.train()
     train_loss = 0

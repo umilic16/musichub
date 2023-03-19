@@ -1,6 +1,7 @@
 # training_demo/
 *.old/
 requirements*.txt
+hyperparameters*.txt
 models/
 
 # Byte-compiled / optimized / DLL files

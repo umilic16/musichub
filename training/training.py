@@ -1,20 +1,10 @@
 from neuralintents import GenericAssistant
 
-def request_data():
-    print("You triggered request_data")
-    # Some action you want to take
-
-def play_music():
-    print("You triggered play_music!")
-    # Some action you want to take
-
-mappings = {'request_data' : request_data, 'play_music' : play_music}
-
-assistant = GenericAssistant('data/intents.json', intent_methods=mappings ,model_name="test_model")
+assistant = GenericAssistant('data/intents.json', model_name="test_model")
 assistant.train_model()
 assistant.save_model()
 
-done = False
+# done = False
 
 # while not done:
 #     message = input("Enter a message: ")
