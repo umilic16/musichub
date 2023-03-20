@@ -22,13 +22,13 @@ def play_music(message):
 
 
 mappings = {'request_data': request_data, 'play_music': play_music}
-assistant = GenericAssistant(intent_methods=mappings, model_name="test_model")
-assistant.load_model()
+assistant = GenericAssistant(intent_methods=mappings, model_name="test_model", responses="training/data/responses.json")
+assistant.load_model("training/models")
 
 
 while True:
     # Receive input from user
-    user_input = input("How can I assist you? ")
+    user_input = input("Enter a message: ")
     if user_input == "STOP":
         break
     else:

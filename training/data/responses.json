@@ -1,0 +1,58 @@
+{
+    "intents": [
+        {
+            "tag": "request_data",
+            "responses": []
+        },
+        {
+            "tag": "play_music",
+            "responses": []
+        },
+        {
+            "tag": "greeting",
+            "responses": [
+                "Hello!",
+                "Hey!",
+                "Hi there, how can I help?",
+                "How can i help you?",
+                "Hi :)"
+            ]
+        },
+        {
+            "tag": "introduction",
+            "responses": [
+                "Hello my name is MusicHub, im an AI Assistant for music. :)\nIf u need some music related information, or u want to listen to some music, let me know!",
+                "Hi im MusicHub, how can i help you?",
+                "Im an Intelligent Virtual Assistant called MusicHub :)",
+                "Hello, I'm MusicHub! Whether you want to have a conversation about music or listen to some tunes, I'm always here to lend an ear.",
+                "Hello there, I'm MusicHub, your personal AI music assistant. If you need help discovering new songs or want to chat about your favorite artists, let me know!",
+                "Greetings, I'm MusicHub, your go-to source for all things music-related. Whether you want to learn about music history or explore different genres, I'm here to guide you.",
+                "Hi, I'm MusicHub, your virtual music companion."
+            ]
+        },
+        {
+            "tag": "goodbye",
+            "responses": [
+                "Bye.",
+                "Have a nice day!",
+                "See ya :)",
+                "Goodbye!",
+                "Take care!"
+            ]
+        },
+        {
+            "tag": "thanks",
+            "responses": [
+                "Happy to help!",
+                "My pleasure!",
+                "No problem!",
+                "Not a problem at all!",
+                "You're welcome!",
+                "No worries!",
+                "Don't mention it!",
+                "Anytime!",
+                "Glad to help!"
+            ]
+        }
+    ]
+}

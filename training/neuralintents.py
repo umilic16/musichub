@@ -26,18 +26,25 @@ nltk.download('wordnet', quiet=True)
 
 class GenericAssistant():
 
-    def __init__(self, intents, intent_methods={}, model_name="assistant_model"):
+    def __init__(self, intents="", responses="", intent_methods={}, model_name="assistant_model"):
         self.intents = intents
         self.intent_methods = intent_methods
         self.model_name = model_name
+        self.responses = responses
 
         if intents.endswith(".json"):
             self.load_json_intents(intents)
+
+        if responses.endswith(".json"):
+            self.load_json_responses(responses)
 
         self.lemmatizer = WordNetLemmatizer()
 
     def load_json_intents(self, intents):
         self.intents = json.loads(open(intents).read())
+
+    def load_json_responses(self, responses):
+        self.responses = json.loads(open(responses).read())
 
     def train_model(self):
 
@@ -83,10 +90,10 @@ class GenericAssistant():
 
         # Split the data into training and validation sets
         train_x, val_x, train_y, val_y = train_test_split(
-            x, y, test_size=0.20, random_state=42)
+            x, y, test_size=0.2, random_state=42)
 
         self.model = Sequential()
-        self.model.add(Dense(128, input_shape=(
+        self.model.add(Dense(256, input_shape=(
             len(train_x[0]),), activation='relu'))
         self.model.add(Dropout(0.5))
         self.model.add(Dense(128, activation='relu'))
@@ -116,33 +123,33 @@ class GenericAssistant():
         plt.legend(['Training', 'Validation'], loc='lower right')
         plt.show()
 
-    def save_model(self, model_name=None):
+    def save_model(self, path="models", model_name=None):
         if model_name is None:
-            self.model.save(f"models/{self.model_name}.h5", self.hist)
+            self.model.save(f"{path}/{self.model_name}.h5", self.hist)
             pickle.dump(self.words, open(
-                f'models/{self.model_name}_words.pkl', 'wb'))
+                f'{path}/{self.model_name}_words.pkl', 'wb'))
             pickle.dump(self.classes, open(
-                f'models/{self.model_name}_classes.pkl', 'wb'))
+                f'{path}/{self.model_name}_classes.pkl', 'wb'))
         else:
-            self.model.save(f"models/{model_name}.h5", self.hist)
+            self.model.save(f"{path}/{model_name}.h5", self.hist)
             pickle.dump(self.words, open(
-                f'models/{model_name}_words.pkl', 'wb'))
+                f'{path}/{model_name}_words.pkl', 'wb'))
             pickle.dump(self.classes, open(
-                f'models/{model_name}_classes.pkl', 'wb'))
+                f'{path}/{model_name}_classes.pkl', 'wb'))
 
-    def load_model(self, model_name=None):
+    def load_model(self, path, model_name=None):
         if model_name is None:
             self.words = pickle.load(
-                open(f'models/{self.model_name}_words.pkl', 'rb'))
+                open(f'{path}/{self.model_name}_words.pkl', 'rb'))
             self.classes = pickle.load(
-                open(f'models/{self.model_name}_classes.pkl', 'rb'))
-            self.model = load_model(f'models/{self.model_name}.h5')
+                open(f'{path}/{self.model_name}_classes.pkl', 'rb'))
+            self.model = load_model(f'{path}/{self.model_name}.h5')
         else:
             self.words = pickle.load(
-                open(f'models/{model_name}_words.pkl', 'rb'))
+                open(f'{path}/{model_name}_words.pkl', 'rb'))
             self.classes = pickle.load(
-                open(f'models/{model_name}_classes.pkl', 'rb'))
-            self.model = load_model(f'models/{model_name}.h5')
+                open(f'{path}/{model_name}_classes.pkl', 'rb'))
+            self.model = load_model(f'{path}/{model_name}.h5')
 
     def _clean_up_sentence(self, sentence):
         sentence_words = nltk.word_tokenize(sentence)
@@ -172,11 +179,11 @@ class GenericAssistant():
                 {'intent': self.classes[r[0]], 'probability': str(r[1])})
         return return_list
 
-    def _get_response(self, ints, intents_json):
+    def _get_response(self, ints, responses_json):
         try:
             tag = ints[0]['intent']
-            list_of_intents = intents_json['intents']
-            for i in list_of_intents:
+            list_of_responses = responses_json['intents']
+            for i in list_of_responses:
                 if i['tag'] == tag:
                     result = random.choice(i['responses'])
                     break
@@ -191,4 +198,4 @@ class GenericAssistant():
             if ints[0]['intent'] in self.intent_methods.keys():
                 self.intent_methods[ints[0]['intent']](message)
             else:
-                return self._get_response(ints, self.intents)
+                return self._get_response(ints, self.responses)

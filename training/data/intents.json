@@ -209,10 +209,10 @@
                 "can i get a brief explanation on origins of hiphop",
                 "explain me briefly the difference between metal and rock",
                 "give me an explanation on how clarinet works",
-                "Hi, musichub do u know who is the first jazz musician?",
+                "musichub do u know who is the first jazz musician?",
                 "Yo musichub which rapper sold most records",
                 "Sup bro when did beethoven write his first symphony",
-                "Hi, can u give me some info about neosoul",
+                "Can u give me some info about neosoul",
                 "give me some knowledge about rico recklezz",
                 "who r nwa members",
                 "Music hub can u give me dj pauls biography",
@@ -406,8 +406,7 @@
                 "What was youtube planning on doing to labels it did not reach a deal with?",
                 "What service launched in May 2014 was a subscription based service?",
                 "How did the 808 change the whole rap game"
-            ],
-            "responses": []
+            ]
         },
         {
             "tag": "play_music",
@@ -415,7 +414,7 @@
                 "Play eminem not afraid",
                 "Play Method man-gotta have it",
                 "Play some ac/dc hits",
-                "Hi, give me an Led Zeppelin song",
+                "Hello give me an Led Zeppelin song",
                 "Play Michale Jackson Thriller",
                 "Can you play Bohemian Rhapsody by Queen?",
                 "I want to listen to 'Stairway to Heaven' by Led Zeppelin.",
@@ -477,13 +476,13 @@
                 "give me some jazz",
                 "i wanna hear some neo-soul",
                 "lets hear a popular hard rock song"
-            ],
-            "responses": []
+            ]
         },
         {
             "tag": "greeting",
             "patterns": [
                 "Hi",
+                "Hi my friend",
                 "Hello",
                 "Good evening",
                 "Whats up",
@@ -498,18 +497,12 @@
                 "Top of the morning to you!",
                 "Hey there",
                 "Heya",
+                "Hi musichub, how u doin",
                 "good day",
                 "howdy",
                 "yo",
                 "sup bro",
                 "sup musichub"
-            ],
-            "responses": [
-                "Hello!",
-                "Hey!",
-                "Hi there, how can I help?",
-                "How can i help you?",
-                "Hi :)"
             ]
         },
         {
@@ -517,28 +510,19 @@
             "patterns": [
                 "Are u MusicHub",
                 "who are you",
-                "Hi whats your name?",
+                "whats your name?",
                 "How should i call u?",
                 "Who is music hub",
                 "may I know your name?",
                 "Could you introduce yourself?",
                 "Pardon me, I don't think we've met yet.",
-                "Hi, I'm sorry I don't recognize you. Could you tell me your name?",
+                "I'm sorry I don't recognize you. Could you tell me your name?",
                 "I don't think we've met before.",
                 "What do you know about Music Hub?",
                 "who r u",
                 "Who is musichub",
                 "how u called",
                 "are u some chatbot"
-            ],
-            "responses": [
-                "Hello my name is MusicHub, im an AI Assistant for music. :)\nIf u need some music related information, or u want to listen to some music, let me know!",
-                "Hi im MusicHub, how can i help you?",
-                "Im an Intelligent Virtual Assistant called MusicHub :)",
-                "Hello, I'm MusicHub! Whether you want to have a conversation about music or listen to some tunes, I'm always here to lend an ear.",
-                "Hello there, I'm MusicHub, your personal AI music assistant. If you need help discovering new songs or want to chat about your favorite artists, let me know!",
-                "Greetings, I'm MusicHub, your go-to source for all things music-related. Whether you want to learn about music history or explore different genres, I'm here to guide you.",
-                "Hi, I'm MusicHub, your virtual music companion."
             ]
         },
         {
@@ -564,13 +548,6 @@
                 "see u",
                 "i gotta take off",
                 "I have to go, see u later"
-            ],
-            "responses": [
-                "Bye.",
-                "Have a nice day!",
-                "See ya :)",
-                "Goodbye!",
-                "Take care!"
             ]
         },
         {
@@ -589,17 +566,6 @@
                 "I appreciate your help.",
                 "You are amazing, thank you!",
                 "Many thanks"
-            ],
-            "responses": [
-                "Happy to help!",
-                "My pleasure!",
-                "No problem!",
-                "Not a problem at all!",
-                "You're welcome!",
-                "No worries!",
-                "Don't mention it!",
-                "Anytime!",
-                "Glad to help!"
             ]
         }
     ]
