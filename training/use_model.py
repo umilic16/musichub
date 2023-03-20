@@ -1,6 +1,5 @@
 from neuralintents import GenericAssistant
 
-
 def request_data():
     print("You triggered request_data")
     # Some action you want to take
