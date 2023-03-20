@@ -1,10 +1,8 @@
-# Step 2: Load the pre-trained models
 from transformers import BertTokenizer, BertForSequenceClassification
 import torch.optim as optim
 import torch
 import json
 from sklearn.model_selection import train_test_split
-import numpy as np
 
 with open('data/intents.json') as f:
     data = json.load(f)
@@ -22,7 +20,6 @@ for idx, intent in enumerate(data['intents']):
 
 # for text, label in zip(train_texts, train_labels):
 #     print(f'Text: {text}\nLabel: {label}\n')
-
 
 train_texts, val_texts, train_labels, val_labels = train_test_split(
     train_texts, train_labels, test_size=0.2)
@@ -43,7 +40,7 @@ encoded_val_texts = tokenizer(
 val_dataset = torch.utils.data.TensorDataset(
     encoded_val_texts['input_ids'], encoded_val_texts['attention_mask'], torch.tensor(val_labels))
 val_loader = torch.utils.data.DataLoader(
-    val_dataset, batch_size=16, shuffle=True)
+    val_dataset, batch_size=8, shuffle=True)
 
 # Fine-tune the model on the training data
 optimizer = optim.AdamW(model.parameters(), lr=5e-5)
@@ -93,16 +90,3 @@ for epoch in range(50):
     print(f'Epoch {epoch+1}: Train Loss: {train_loss:.4f}, Train Acc: {train_accuracy:.4f}, Val Loss: {val_loss:.4f}, Val Acc: {val_accuracy:.4f}')
 
 torch.save(model.state_dict(), 'models/train_gpt_model.pt')
-
-
-# Use the fine-tuned model to recognize user intent
-def recognize_intent(user_input):
-    encoded_input = tokenizer.encode_plus(user_input, return_tensors='pt')
-    output = model(**encoded_input)
-    predicted_intent = torch.argmax(output.logits)
-    return predicted_intent.item()
-
-# Example usage
-# user_input = "Can you play a song by Eminem?"
-# intent = recognize_intent(user_input)
-# print(train_values[intent])

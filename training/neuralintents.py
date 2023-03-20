@@ -83,10 +83,10 @@ class GenericAssistant():
 
         # Split the data into training and validation sets
         train_x, val_x, train_y, val_y = train_test_split(
-            x, y, test_size=0.2, random_state=42)
+            x, y, test_size=0.20, random_state=42)
 
         self.model = Sequential()
-        self.model.add(Dense(256, input_shape=(
+        self.model.add(Dense(128, input_shape=(
             len(train_x[0]),), activation='relu'))
         self.model.add(Dropout(0.5))
         self.model.add(Dense(128, activation='relu'))
