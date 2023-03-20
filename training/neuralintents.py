@@ -189,6 +189,6 @@ class GenericAssistant():
         # print(ints)
         if (ints):
             if ints[0]['intent'] in self.intent_methods.keys():
-                self.intent_methods[ints[0]['intent']]()
+                self.intent_methods[ints[0]['intent']](message)
             else:
                 return self._get_response(ints, self.intents)

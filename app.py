@@ -1,42 +1,38 @@
-import spacy
+from functions import get_music_info, play_song
+from training.neuralintents import GenericAssistant
 
-data = {
-    "song_request": ["Can you play Bohemian Rhapsody by Queen?",
-                     "I would like 'Shape of You' by Ed Sheeran.",
-                     "Play eminem lose yourself",
-                     "Can you add Stairway to Heaven by Led Zeppelin to the playlist?",
-                     "Can you play 'Sweet Child O' Mine' by Guns N' Roses next?",
-                     "I request anderson paak come down",
-                     "Could you please play 'Don't Stop Believin'' by Journey?",
-                     "I want to hear Eye of the Tiger by Survivor.",
-                     "Can you play 'Smells Like Teen Spirit' by Nirvana?",
-                     "Can you add 'Livin' on a Prayer' by Bon Jovi to the playlist?",
-                     "Please play 'I Will Always Love You' by Whitney Houston."],
-    "data_request": ["Who is mozzart",
-                     "What do you know about Method Man",
-                     "Who is the most successful musician",
-                     "Can you tell me more about the life of Freddie Mercury?",
-                     "What are some of the biggest hits from Michael Jackson?",
-                     "Who is the lead guitarist of Guns N' Roses?",
-                     "What was the first album released by Led Zeppelin?",
-                     "Can you provide me with information about the origins of hip hop?",
-                     "What is the most popular genre of music in the United States?",
-                     "Who was the first female rapper to win a Grammy award?",
-                     "What was the name of Prince's backup band?",
-                     "What inspired the Beatles to write 'Let It Be'?",
-                     "Can you tell me more about the history of the Rolling Stones?"]
-}
+def request_data(message):
+    print("You triggered request_data")
+    print(message)
+    # Retrieve information about music topic using OpenAI API
+    # info = get_music_info(message)
 
 
-# see github repo for examples on sentence-transformers and Huggingface
-nlp = spacy.load('en_core_web_trf')
-nlp.add_pipe("text_categorizer",
-             config={
-                 "data": data,
-                 "model": "spacy"
-             }
-             )
+def play_music(message):
+    print("You triggered play_music!")
+    print(message)
+    # Extract song name from user input
+    # song_name = extract_song_name(user_input)
+    # Play song using YouTube API
+    # link = play_song(song_name)
+    # if link is not None:
+    #     print(f"Playing {song_name}: {link}")
+    # else:
+    #     print("Sorry, I could not find that song on YouTube.")
 
-print(nlp("Play me an Eminem song")._.cats)
-print(nlp("Method man hit")._.cats)
-print(nlp("Best lil baby song")._.cats)
+
+mappings = {'request_data': request_data, 'play_music': play_music}
+assistant = GenericAssistant(intent_methods=mappings, model_name="test_model")
+assistant.load_model()
+
+
+while True:
+    # Receive input from user
+    user_input = input("How can I assist you? ")
+    if user_input == "STOP":
+        break
+    else:
+        # Use intent recognition model to determine user's intent
+        response = assistant.request(user_input)
+        if response:
+            print(response)
