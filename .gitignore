@@ -3,7 +3,8 @@
 requirements*.txt
 hyperparameters*.txt
 models/
-music_data/
+keggle_data/
+wiki_data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
