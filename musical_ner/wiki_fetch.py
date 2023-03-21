@@ -26,8 +26,7 @@ def get_all_genres():
         pass
 
 # this function gets all artists from all wiki pages in the lists of musicians page
-
-
+# not 100% accurate needs more cleaning up, but i gave up and cleaned it with regex
 def get_all_artists():
     try:
         # URL of the Wikipedia page with the list of music artists
@@ -80,7 +79,7 @@ def get_all_artists():
             with open("data/wiki_data/wiki_artists.csv", "w", newline='', encoding="utf-8") as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerow(['artist'])
-                print(f'writing data from {link}')
+                # print(f'writing data from {link}')
                 for line in text:
                     writer.writerow([line])
     except Exception as ex:
@@ -121,4 +120,4 @@ def get_all_instruments():
         print(ex)
 
 
-get_all_instruments()
+get_all_artists()

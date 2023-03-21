@@ -96,45 +96,12 @@ def split_multiple_genres():
 # for filename in os.listdir(folder_path):
 #     write_outputs(folder_path, filename)
 
-# # remove duplicates from exported files
-# folder_path = 'data/'
-# for filename in os.listdir(folder_path):
-#     remove_duplicates(folder_path, filename)
-
 # # split rows that contain multiple values in genres.csv and remove duplicates again
-# split_multiple_genres()
+split_multiple_genres()
+
+# remove duplicates from exported files
+folder_path = 'data/'
+for filename in os.listdir(folder_path):
+    remove_duplicates(folder_path, filename)
+
 # remove_duplicates(folder_path, 'genres.csv')
-
-# ultra slow and not needed function, used once to clean up wiki artist entries
-def clean_up_artists():
-    # remove_duplicates('data/', 'wiki_artists.csv')
-    data = []
-    with open('data/wiki_data/wiki_artists.csv', 'r', encoding='utf-8') as wiki_file, \
-        open('data/genres.csv', 'r', encoding='utf-8') as genre_file, \
-        open('data/instruments.csv', 'r', encoding='utf-8') as insturment_file:
-        wiki_reader = csv.reader(wiki_file)
-        genre_reader = csv.reader(genre_file)
-        instrment_reader = csv.reader(insturment_file)
-        next(genre_reader)
-        next(instrment_reader)
-        header = next(wiki_reader)
-        genres = np.array([row[0] for row in genre_reader])
-        instruments = np.array([row[0] for row in instrment_reader])
-        group = np.concatenate((genres,instruments))
-        # print(group)
-        for row in wiki_reader:
-            artist = row[0].lower()
-            for entry in group:
-                if entry not in artist:
-                    data.append(row)
-        print(len(data))
-    with open('data/wiki_data/wiki_artists.csv', 'w', encoding='utf-8', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(header)
-        for row in data:
-            writer.writerow([row])
-
-
-# folder_path = 'data/'
-# remove_duplicates(folder_path, 'artists.csv')
-clean_up_artists()

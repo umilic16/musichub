@@ -38,25 +38,5 @@ def test_model(model, text):
     return (results)
 
 patterns = create_training_data("data/artists.json", "ARTIST")
-generate_rules(patterns, "musical_ner")
 # print (patterns)
-
-nlp = spacy.load("models/musical_ner")
-ie_data = {}
-with open ("data/training_data.txt", "r")as f:
-    text = f.read()
-    chapters = text.split("CHAPTER")[1:]
-    for chapter in chapters:
-        chapter_num, chapter_title = chapter.split("\n\n")[0:2]
-        chapter_num = chapter_num.strip()
-        segments = chapter.split("\n\n")[2:]
-        hits = []
-        for segment in segments:
-            segment = segment.strip()
-            segment = segment.replace("\n", " ")
-            results = test_model(nlp, segment)
-            for result in results:
-                hits.append(result)
-        ie_data[chapter_num] = hits
-
-save_data("data/result.json", ie_data)
+generate_rules(patterns, "musical_ner")
