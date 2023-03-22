@@ -3,7 +3,7 @@
 requirements*.txt
 hyperparameters*.txt
 models/
-keggle_data/
+keggle_data*/
 wiki_data/
 
 # Byte-compiled / optimized / DLL files

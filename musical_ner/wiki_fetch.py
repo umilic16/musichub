@@ -85,7 +85,7 @@ def get_all_artists():
     except Exception as ex:
         print(ex)
 
-# get_all_artists()
+get_all_artists()
 
 
 def get_all_instruments():
@@ -120,4 +120,4 @@ def get_all_instruments():
         print(ex)
 
 
-get_all_artists()
+# get_all_instruments()
