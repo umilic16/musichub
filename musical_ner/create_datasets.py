@@ -3,6 +3,7 @@ import csv
 import re
 import numpy as np
 import pandas as pd
+import json
 
 # functions for extracting information from multiple datasources from keggle and wiki
 
@@ -67,7 +68,7 @@ def remove_duplicates(folder_path):
                 with open(os.path.join(folder_path, filename), 'r', encoding='utf-8') as csvfile:
                     # read the CSV file
                     df = pd.read_csv(csvfile)
-                    print(f'processing {filename}')
+                    # print(f'processing {filename}')
                     df.drop_duplicates(keep='first', inplace=True)
                 with open(os.path.join(folder_path, f'{filename}'), 'w', newline='', encoding='utf-8') as outputfile:
                     df.to_csv(outputfile, index=False)
@@ -87,7 +88,8 @@ def split_multiple_genres(folder_path):
             header = next(reader)
             for row in reader:
                 if ',' in row[0]:
-                    genres = [genre.strip() for genre in re.split(r'((?<!\s),| \/ (?=[^\/]+$))', row[0])]
+                    genres = [genre.strip() for genre in re.split(
+                        r'((?<!\s),| \/ (?=[^\/]+$))', row[0])]
                     for genre in genres:
                         if genre != ',':
                             unique_rows.append(genre)
@@ -103,6 +105,7 @@ def split_multiple_genres(folder_path):
     except Exception as ex:
         print(ex)
 
+
 def split_multiple_artists(folder_path):
     try:
         if not os.path.exists(folder_path):
@@ -113,8 +116,9 @@ def split_multiple_artists(folder_path):
             unique_rows = []
             header = next(reader)
             for row in reader:
-                if any(token in row[0] for token in [',','ft.','feat ', 'featuring ']):
-                    artists = [artist.strip() for artist in re.split(r'(,|ft\.|feat |featuring )', row[0])]
+                if any(token in row[0] for token in [',', 'ft.', 'feat ', 'featuring ']):
+                    artists = [artist.strip() for artist in re.split(
+                        r'(,|ft\.|feat |featuring )', row[0])]
                     # print(genres)
                     for artist in artists:
                         unique_rows.append(artist)
@@ -130,6 +134,7 @@ def split_multiple_artists(folder_path):
     except Exception as ex:
         print(ex)
 
+
 source_path = 'data/keggle_data'
 output_path = 'data/keggle_data_exported'
 
@@ -143,6 +148,19 @@ output_path = 'data/keggle_data_exported'
 # split_multiple_genres(output_path)
 # split_multiple_artists(output_path)
 
-# remove duplicates from exported files
-output_path = 'data'
-remove_duplicates(output_path)
+# # remove duplicates from exported files
+# output_path = 'data'
+# remove_duplicates(output_path)
+
+
+# input_dir = 'data/csv_data.old'
+# for file in os.listdir(input_dir):
+#     # Read CSV file into pandas DataFrame
+#     with open(os.path.join(input_dir, file), 'r', encoding='utf-8') as csv_file:
+#         df = pd.read_csv(csv_file)
+#         file_name = os.path.splitext(file)[0] + '.json'
+#         # print(file_name)
+#         values = [val for row in df.values for val in row]
+#         # df.to_json(f'data/{file_name}', orient='values', indent=4)
+#         with open(f'data/{file_name}', 'w', encoding='utf-8') as json_file:
+#             json.dump(values, json_file, indent=4)

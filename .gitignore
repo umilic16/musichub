@@ -1,10 +1,13 @@
-# training_demo/
+# training_data, modelsn unimportant files 
+# and large files that can be generated using created functions
 *.old/
 requirements*.txt
 hyperparameters*.txt
 models/
 keggle_data*/
 wiki_data/
+all_patterns.json
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
