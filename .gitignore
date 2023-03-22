@@ -8,6 +8,8 @@ keggle_data*/
 csv_data/
 wiki_data/
 all_patterns.json
+training_data.json
+create_entity_ruler.py
 
 
 # Byte-compiled / optimized / DLL files
