@@ -46,6 +46,7 @@ def test_model(model, text):
 
 # patterns = create_training_data('data/albums.json', "ALBUM")
 # print (patterns[:10])
+
 # patterns = []
 # patterns.extend(create_training_data("data/albums.json", "ALBUM"))
 # patterns.extend(create_training_data("data/artists.json", "ARTIST"))
@@ -54,5 +55,6 @@ def test_model(model, text):
 # patterns.extend(create_training_data("data/songs.json", "SONG"))
 
 # save_data('data/all_patterns.json', patterns)
+
 data = load_data('data/all_patterns.json')
 generate_rules(data, "musical_ner")

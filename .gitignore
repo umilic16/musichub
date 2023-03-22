@@ -5,6 +5,7 @@ requirements*.txt
 hyperparameters*.txt
 models/
 keggle_data*/
+csv_data/
 wiki_data/
 all_patterns.json
 

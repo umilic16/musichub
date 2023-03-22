@@ -100,7 +100,7 @@ def split_multiple_genres(folder_path):
             writer = csv.writer(csvfile)
             writer.writerow(header)
             for row in unique_rows:
-                writer.writerow([row.lower()])
+                writer.writerow([row])
             print('genres are split')
     except Exception as ex:
         print(ex)
@@ -116,27 +116,30 @@ def split_multiple_artists(folder_path):
             unique_rows = []
             header = next(reader)
             for row in reader:
-                if any(token in row[0] for token in [',', 'ft.', 'feat ', 'featuring ']):
-                    artists = [artist.strip() for artist in re.split(
-                        r'(,|ft\.|feat |featuring )', row[0])]
-                    # print(genres)
-                    for artist in artists:
-                        unique_rows.append(artist)
-                else:
-                    unique_rows.append(row[0])
+                # pattern for spliting rows that contain featurings in some form
+                pattern = r'\b(?:ft\.?|ft\s?|feat\.?|feat\s?|featuring.?|x)\b'
+                # result = re.findall(pattern, row[0])
+                # if(result):
+                #     print(row[0])
+                artists = re.split(pattern, row[0])
+                artists = [string.strip() for string in artists if string.strip()]
+                for artist in artists:
+                    unique_rows.append(artist)
+                # else:
+                #     unique_rows.append(row[0])
         # write unique rows back to file
         with open(f'{folder_path}/artists.csv', 'w', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(header)
             for row in unique_rows:
-                writer.writerow([row.lower()])
+                writer.writerow([row])
             print('artists are split')
     except Exception as ex:
         print(ex)
 
 
-source_path = 'data/keggle_data'
-output_path = 'data/keggle_data_exported'
+# source_path = 'data/keggle_data'
+# output_path = 'data/keggle_data_exported'
 
 # # set the path to the folder containing CSV files
 # create_output_files(output_path)
@@ -144,16 +147,18 @@ output_path = 'data/keggle_data_exported'
 # # write all columns needed from music/data
 # write_outputs(source_path, output_path)
 
-# split rows that contain multiple values in genres.csv and remove duplicates again
+# # split rows that contain multiple values like 
 # split_multiple_genres(output_path)
 # split_multiple_artists(output_path)
 
 # # remove duplicates from exported files
-# output_path = 'data'
 # remove_duplicates(output_path)
 
+# the files containing albums, artists, genres, instruments and songs are in ouput_path folder (keggle_data_exported)
+# the files are further cleaned using regex and saved in csv_data after that they are converted into json files for creating patterns
 
-# input_dir = 'data/csv_data.old'
+# convert csv files to json for further processing
+# input_dir = 'data/csv_data'
 # for file in os.listdir(input_dir):
 #     # Read CSV file into pandas DataFrame
 #     with open(os.path.join(input_dir, file), 'r', encoding='utf-8') as csv_file:
