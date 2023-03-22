@@ -1,9 +1,7 @@
 import os
 import csv
 import re
-import numpy as np
 import pandas as pd
-import json
 
 # functions for extracting information from multiple datasources from keggle and wiki
 
