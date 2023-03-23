@@ -1,12 +1,13 @@
 import json
 import random
-
+from tqdm import tqdm
+from spacy.tokens import DocBin
+import spacy
 
 def load_data(file):
     with open(file, "r", encoding='utf-8') as f:
         data = json.load(f)
     return (data)
-
 
 def save_data(file, data):
     with open(file, "w", encoding='utf-8') as f:
@@ -25,6 +26,11 @@ patterns = [
     "Give me some",
     "Hi, can u play",
     "Play",
+    "Hello my friend, im fealing great today can u play",
+    "Hello how are you doin, im here for some",
+    "im here for",
+    "Hi bro can u play",
+    "Hi can you play me"
     "Play some music",
     "Hey Music Hub, gimme some",
     "Hey MusicHub, play",
@@ -46,6 +52,12 @@ patterns = [
     "Can you put on some",
     "I'm in the mood for",
     "put some",
+    "Yo music hub, play",
+    "Sup music hub can u play",
+    "whats up music hub play me",
+    "hi music hub, lets hear",
+    "i want",
+    "i need"
     "give me some",
     "i wanna hear some",
     "lets hear a",
@@ -86,10 +98,9 @@ song_s = ["", "", "", "song", "please"]
     2 - album artist
     3 - album song
 """
-def create_albums_text(albums_data, artists_data, songs_data):
+def create_albums_text(album, artists_data, songs_data):
     choice = random.randint(1, 3)
     pattern = random.choice(patterns)
-    album = random.choice(albums_data)
 
     text = pattern + " "
     album_start = len(text)
@@ -145,10 +156,9 @@ def create_albums_text(albums_data, artists_data, songs_data):
     2 - artist album
     3 - artist song
 """
-def create_artists_text(albums_data, artists_data, songs_data):
+def create_artists_text(albums_data, artist, songs_data):
     choice = random.randint(1, 3)
     pattern = random.choice(patterns)
-    artist = random.choice(artists_data)
 
     text = pattern + " "
 
@@ -212,9 +222,8 @@ def create_artists_text(albums_data, artists_data, songs_data):
     return result
 
 
-def create_genres_text(genres_data):
+def create_genres_text(genre):
     pattern = random.choice(patterns)
-    genre = random.choice(genres_data)
 
     text = pattern + " "
 
@@ -237,9 +246,8 @@ def create_genres_text(genres_data):
     return result
 
 
-def create_instruments_text(instruments_data):
+def create_instruments_text(instrument):
     pattern = random.choice(patterns)
-    instrument = random.choice(instruments_data)
 
     text = pattern + " "
 
@@ -263,10 +271,9 @@ def create_instruments_text(instruments_data):
     2 - song album
     3 - song artist
 """
-def create_songs_text(albums_data, artists_data, songs_data):
+def create_songs_text(albums_data, artists_data, song):
     choice = random.randint(1, 3)
     pattern = random.choice(patterns)
-    song = random.choice(songs_data)
 
     text = pattern + " "
 
@@ -316,21 +323,102 @@ def create_songs_text(albums_data, artists_data, songs_data):
     # print(result)
     return result
 
-albums_data = load_data('data/albums.json')
-artists_data = load_data('data/artists.json')
-genres_data = load_data('data/genres.json')
-instruments_data = load_data('data/instruments.json')
-songs_data = load_data('data/songs.json')
 
-data = []
-for i in range(300000):
-    data.append(create_albums_text(albums_data, artists_data, songs_data))
-    data.append(create_artists_text(albums_data, artists_data, songs_data))
-    data.append(create_songs_text(albums_data,artists_data,songs_data))
-    if i % 3 == 0:
-        data.append(create_genres_text(genres_data))
-    if i % 10 == 0:
-        data.append(create_instruments_text(instruments_data))
+# albums_data = load_data('data/albums.json')
+# n = int(len(albums_data)*0.75)
+# albums_data_tr = albums_data[0:n]
+# albums_data_val = albums_data[n+1:]
 
-# print(data)
-save_data('data/training_data.json', data)
+# artists_data = load_data('data/artists.json')
+# n = int(len(artists_data)*0.75)
+# artists_data_tr = artists_data[0:n]
+# artists_data_val = artists_data[n+1:]
+
+# genres_data = load_data('data/genres.json')
+# n = int(len(genres_data)*0.75)
+# genres_data_tr = genres_data[0:n]
+# genres_data_val = genres_data[n+1:]
+
+# instruments_data = load_data('data/instruments.json')
+# n = int(len(instruments_data)*0.75)
+# instruments_data_tr = instruments_data[0:n]
+# instruments_data_val = instruments_data[n+1:]
+
+# songs_data = load_data('data/songs.json')
+# n = int(len(songs_data)*0.75)
+# songs_data_tr = songs_data[0:n]
+# songs_data_val = songs_data[n+1:]
+
+# data = []
+# print("Generating album training examples")
+# for album in tqdm(albums_data_tr):
+#     data.append(create_albums_text(album, artists_data_tr, songs_data_tr))
+# print("Generating artist training examples")
+# for artist in tqdm(artists_data_tr):
+#     data.append(create_artists_text(albums_data_tr, artist, songs_data_tr))
+# print("Generating song training examples")
+# for song in tqdm(songs_data_tr):
+#     data.append(create_songs_text(albums_data_tr,artists_data_tr,song))
+# print("Generating genre training examples")
+# for genre in tqdm(genres_data_tr):
+#         data.append(create_genres_text(genre))
+# print("Generating instrument training examples")
+# for instrument in tqdm(instruments_data_tr):
+#         data.append(create_instruments_text(instrument))
+
+# print('Saving training data')
+# random.shuffle(data)
+# save_data('data/training_data.json', data)
+# print('Saved training data\nConverting .json training data to .spacy format')
+
+data = load_data('data/training_data.json')
+nlp = spacy.blank("en")
+db = DocBin()
+for text, annotations in tqdm(data[:7500]):
+    doc = nlp.make_doc(text)
+    ents = []
+    for start, end, label in annotations["entities"]:
+        span = doc.char_span(start, end, label=label)
+        if span is not None:
+            ents.append(span)
+    doc.ents = ents
+    db.add(doc)
+db.to_disk("data/training_data.spacy")
+print('training_data.spacy is saved and ready!')
+
+
+# data = []
+# print("Generating album validation examples")
+# for album in tqdm(albums_data_val):
+#     data.append(create_albums_text(album, artists_data_val, songs_data_val))
+# print("Generating artist validation examples")
+# for artist in tqdm(artists_data_val):
+#     data.append(create_artists_text(albums_data_val, artist, songs_data_val))
+# print("Generating song validation examples")
+# for song in tqdm(songs_data_val):
+#     data.append(create_songs_text(albums_data_val,artists_data_val,song))
+# print("Generating genre validation examples")
+# for genre in tqdm(genres_data_val):
+#         data.append(create_genres_text(genre))
+# print("Generating instrument validation examples")
+# for instrument in tqdm(instruments_data_val):
+#         data.append(create_instruments_text(instrument))
+
+# print('Saving validation data')
+# random.shuffle(data)
+# save_data('data/validation_data.json', data)
+# print('Saved validation data\nConverting .json validation data to .spacy format')
+
+data = load_data('data/validation_data.json')
+db = DocBin()
+for text, annotations in tqdm(data[:2500]):
+    doc = nlp.make_doc(text)
+    ents = []
+    for start, end, label in annotations["entities"]:
+        span = doc.char_span(start, end, label=label)
+        if span is not None:
+            ents.append(span)
+    doc.ents = ents
+    db.add(doc)
+db.to_disk("data/validation_data.spacy")
+print('validation_data.spacy is saved and ready!')

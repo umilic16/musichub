@@ -9,6 +9,7 @@ csv_data/
 wiki_data/
 all_patterns.json
 training_data.json
+validation_data.json
 create_entity_ruler.py
 
 
