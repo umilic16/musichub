@@ -107,7 +107,7 @@ def create_albums_text(album, artists_data, songs_data):
     text += album
     album_end = len(text)
 
-    entities = [(album_start, album_end, "ALBUM")]
+    entities = [(album_start, album_end, "MUSIC")]
 
     if choice == 1:
         pass
@@ -119,13 +119,13 @@ def create_albums_text(album, artists_data, songs_data):
             artist_start = len(text)
             text += artist
             artist_end = len(text)
-            entities.append((artist_start, artist_end, "ARTIST"))
+            entities.append((artist_start, artist_end, "MUSIC"))
         else:
             text += " "
             artist_start = len(text)
             text += artist
             artist_end = len(text)
-            entities.append((artist_start, artist_end, "ARTIST"))
+            entities.append((artist_start, artist_end, "MUSIC"))
     else:
         song = random.choice(songs_data)
         mid = random.choice(album_sm)
@@ -134,13 +134,13 @@ def create_albums_text(album, artists_data, songs_data):
             song_start = len(text)
             text += song
             song_end = len(text)
-            entities.append((song_start, song_end, "SONG"))
+            entities.append((song_start, song_end, "MUSIC"))
         else:
             text += " "
             song_start = len(text)
             text += song
             song_end = len(text)
-            entities.append((song_start, song_end, "SONG"))
+            entities.append((song_start, song_end, "MUSIC"))
 
     sufix = random.choice(album_s)
     if sufix:
@@ -170,7 +170,7 @@ def create_artists_text(albums_data, artist, songs_data):
     text += artist
     artist_end = len(text)
 
-    entities = [(artist_start, artist_end, "ARTIST")]
+    entities = [(artist_start, artist_end, "MUSIC")]
 
     if choice == 1:
         sufix = random.choice(artist_sg)
@@ -187,13 +187,13 @@ def create_artists_text(albums_data, artist, songs_data):
             album_start = len(text)
             text += album
             album_end = len(text)
-            entities.append((album_start, album_end, "ALBUM"))
+            entities.append((album_start, album_end, "MUSIC"))
         else:
             text += " "
             album_start = len(text)
             text += album
             album_end = len(text)
-            entities.append((album_start, album_end, "ALBUM"))
+            entities.append((album_start, album_end, "MUSIC"))
         sufix = random.choice(artist_sa)
         if sufix:
             text += " " + sufix
@@ -205,13 +205,13 @@ def create_artists_text(albums_data, artist, songs_data):
             song_start = len(text)
             text += song
             song_end = len(text)
-            entities.append((song_start, song_end, "SONG"))
+            entities.append((song_start, song_end, "MUSIC"))
         else:
             text += " "
             song_start = len(text)
             text += song
             song_end = len(text)
-            entities.append((song_start, song_end, "SONG"))
+            entities.append((song_start, song_end, "MUSIC"))
 
     sufix = random.choice(artist_ss)
     if sufix:
@@ -235,7 +235,7 @@ def create_genres_text(genre):
     text += genre
     genre_end = len(text)
 
-    entities = [(genre_start, genre_end, "GENRE")]
+    entities = [(genre_start, genre_end, "MUSIC")]
 
     sufix = random.choice(genre_s)
     if sufix:
@@ -255,7 +255,7 @@ def create_instruments_text(instrument):
     text += instrument
     instrument_end = len(text)
 
-    entities = [(instrument_start, instrument_end, "INSTRUMENT")]
+    entities = [(instrument_start, instrument_end, "MUSIC")]
 
     sufix = random.choice(instrument_s)
     if sufix:
@@ -281,7 +281,7 @@ def create_songs_text(albums_data, artists_data, song):
     text += song
     song_end = len(text)
 
-    entities = [(song_start, song_end, "SONG")]
+    entities = [(song_start, song_end, "MUSIC")]
 
     if choice == 1:
         pass
@@ -293,13 +293,13 @@ def create_songs_text(albums_data, artists_data, song):
             album_start = len(text)
             text += album
             album_end = len(text)
-            entities.append((album_start, album_end, "ALBUM"))
+            entities.append((album_start, album_end, "MUSIC"))
         else:
             text += " "
             album_start = len(text)
             text += album
             album_end = len(text)
-            entities.append((album_start, album_end, "ALBUM"))
+            entities.append((album_start, album_end, "MUSIC"))
     else:
         artist = random.choice(artists_data)
         mid = random.choice(song_mar)
@@ -308,13 +308,13 @@ def create_songs_text(albums_data, artists_data, song):
             artist_start = len(text)
             text += artist
             artist_end = len(text)
-            entities.append((artist_start, artist_end, "ARTIST"))
+            entities.append((artist_start, artist_end, "MUSIC"))
         else:
             text += " "
             artist_start = len(text)
             text += artist
             artist_end = len(text)
-            entities.append((artist_start, artist_end, "ARTIST"))
+            entities.append((artist_start, artist_end, "MUSIC"))
     
     sufix = random.choice(song_s)
     if sufix:
@@ -325,27 +325,27 @@ def create_songs_text(albums_data, artists_data, song):
 
 
 # albums_data = load_data('data/albums.json')
-# n = int(len(albums_data)*0.75)
+# n = int(len(albums_data)*0.70)
 # albums_data_tr = albums_data[0:n]
 # albums_data_val = albums_data[n+1:]
 
 # artists_data = load_data('data/artists.json')
-# n = int(len(artists_data)*0.75)
+# n = int(len(artists_data)*0.70)
 # artists_data_tr = artists_data[0:n]
 # artists_data_val = artists_data[n+1:]
 
 # genres_data = load_data('data/genres.json')
-# n = int(len(genres_data)*0.75)
+# n = int(len(genres_data)*0.70)
 # genres_data_tr = genres_data[0:n]
 # genres_data_val = genres_data[n+1:]
 
 # instruments_data = load_data('data/instruments.json')
-# n = int(len(instruments_data)*0.75)
+# n = int(len(instruments_data)*0.70)
 # instruments_data_tr = instruments_data[0:n]
 # instruments_data_val = instruments_data[n+1:]
 
 # songs_data = load_data('data/songs.json')
-# n = int(len(songs_data)*0.75)
+# n = int(len(songs_data)*0.70)
 # songs_data_tr = songs_data[0:n]
 # songs_data_val = songs_data[n+1:]
 
@@ -368,13 +368,14 @@ def create_songs_text(albums_data, artists_data, song):
 
 # print('Saving training data')
 # random.shuffle(data)
-# save_data('data/training_data.json', data)
+# save_data('data/training_data_v2.json', data)
 # print('Saved training data\nConverting .json training data to .spacy format')
 
 data = load_data('data/training_data.json')
+
 nlp = spacy.blank("en")
 db = DocBin()
-for text, annotations in tqdm(data[:7500]):
+for text, annotations in tqdm(data[:700000]):
     doc = nlp.make_doc(text)
     ents = []
     for start, end, label in annotations["entities"]:
@@ -410,8 +411,9 @@ print('training_data.spacy is saved and ready!')
 # print('Saved validation data\nConverting .json validation data to .spacy format')
 
 data = load_data('data/validation_data.json')
+
 db = DocBin()
-for text, annotations in tqdm(data[:2500]):
+for text, annotations in tqdm(data[:300000]):
     doc = nlp.make_doc(text)
     ents = []
     for start, end, label in annotations["entities"]:
@@ -420,5 +422,5 @@ for text, annotations in tqdm(data[:2500]):
             ents.append(span)
     doc.ents = ents
     db.add(doc)
-db.to_disk("data/validation_data.spacy")
+db.to_disk("data/validation_data_v2.spacy")
 print('validation_data.spacy is saved and ready!')
