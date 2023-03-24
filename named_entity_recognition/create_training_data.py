@@ -375,7 +375,7 @@ data = load_data('data/training_data.json')
 
 nlp = spacy.blank("en")
 db = DocBin()
-for text, annotations in tqdm(data[250001:500000]):
+for text, annotations in tqdm(data[:700000]):
     doc = nlp.make_doc(text)
     ents = []
     for start, end, label in annotations["entities"]:
@@ -384,32 +384,7 @@ for text, annotations in tqdm(data[250001:500000]):
             ents.append(span)
     doc.ents = ents
     db.add(doc)
-db.to_disk("data/training_data_gc2.spacy")
-print('training_data.spacy is saved and ready!')
-db = DocBin()
-for text, annotations in tqdm(data[500001:750000]):
-    doc = nlp.make_doc(text)
-    ents = []
-    for start, end, label in annotations["entities"]:
-        span = doc.char_span(start, end, label=label)
-        if span is not None:
-            ents.append(span)
-    doc.ents = ents
-    db.add(doc)
-db.to_disk("data/training_data_gc3.spacy")
-print('training_data.spacy is saved and ready!')
-print('training_data.spacy is saved and ready!')
-db = DocBin()
-for text, annotations in tqdm(data[750001:1000000]):
-    doc = nlp.make_doc(text)
-    ents = []
-    for start, end, label in annotations["entities"]:
-        span = doc.char_span(start, end, label=label)
-        if span is not None:
-            ents.append(span)
-    doc.ents = ents
-    db.add(doc)
-db.to_disk("data/training_data_gc4.spacy")
+db.to_disk("data/training_data.spacy")
 print('training_data.spacy is saved and ready!')
 
 
@@ -436,9 +411,8 @@ print('training_data.spacy is saved and ready!')
 # print('Saved validation data\nConverting .json validation data to .spacy format')
 
 data = load_data('data/validation_data.json')
-
 db = DocBin()
-for text, annotations in tqdm(data[100001:200000]):
+for text, annotations in tqdm(data[:300000]):
     doc = nlp.make_doc(text)
     ents = []
     for start, end, label in annotations["entities"]:
@@ -447,29 +421,5 @@ for text, annotations in tqdm(data[100001:200000]):
             ents.append(span)
     doc.ents = ents
     db.add(doc)
-db.to_disk("data/validation_data_gc2.spacy")
-print('validation_data.spacy is saved and ready!')
-db = DocBin()
-for text, annotations in tqdm(data[200001:300000]):
-    doc = nlp.make_doc(text)
-    ents = []
-    for start, end, label in annotations["entities"]:
-        span = doc.char_span(start, end, label=label)
-        if span is not None:
-            ents.append(span)
-    doc.ents = ents
-    db.add(doc)
-db.to_disk("data/validation_data_gc3.spacy")
-print('validation_data.spacy is saved and ready!')
-db = DocBin()
-for text, annotations in tqdm(data[300001:400000]):
-    doc = nlp.make_doc(text)
-    ents = []
-    for start, end, label in annotations["entities"]:
-        span = doc.char_span(start, end, label=label)
-        if span is not None:
-            ents.append(span)
-    doc.ents = ents
-    db.add(doc)
-db.to_disk("data/validation_data_gc4.spacy")
+db.to_disk("data/validation_data.spacy")
 print('validation_data.spacy is saved and ready!')
