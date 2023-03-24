@@ -11,6 +11,9 @@ all_patterns.json
 training_data.json
 validation_data.json
 create_entity_ruler.py
+*_data_gc*.spacy
+ner_labels_gc*/
+spacy_config_gc*.cfg
 
 
 # Byte-compiled / optimized / DLL files

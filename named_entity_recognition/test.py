@@ -1,6 +1,6 @@
 import spacy
 
-nlp = spacy.load('named_entity_recognition/models/mh_ner/v0.1')
+nlp = spacy.load('models/mh_ner/v1.0/model-best')
 while True:
     text = input("Enter something: ")
     text = text.lower()
