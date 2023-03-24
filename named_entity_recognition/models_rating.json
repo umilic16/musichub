@@ -1,22 +1,28 @@
 {
     "best": {
         "version": "v1.0",
-        "F-score": "89.8%",
+        "F-score": "89.80%",
         "precision": "89.44%",
         "recall": "90.15%"
     },
     "all-models": [
         {
             "version": "v1.0",
-            "F-score": "89.8%",
+            "F-score": "89.80%",
             "precision": "89.44%",
             "recall": "90.15%"
         },
         {
             "version": "v1.1",
-            "F-score": "86.16%",
-            "precision": "85.57%",
-            "recall": "86.75%"
+            "F-score": "86.49%",
+            "precision": "86.25%",
+            "recall": "86.73%"
+        },
+        {
+            "version": "v1.2",
+            "F-score": "86.25%",
+            "precision": "85.27%",
+            "recall": "87.26%"
         }
     ]
 }

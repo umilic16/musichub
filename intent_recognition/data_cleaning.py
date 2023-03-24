@@ -1,4 +1,5 @@
-import json
+import sys
+sys.path.append('../')
 from helpers.json_functions import load_data, save_data
 
 data = load_data('data/train-v2.0.json')
