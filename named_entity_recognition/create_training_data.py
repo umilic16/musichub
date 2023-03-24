@@ -1,17 +1,8 @@
-import json
 import random
 from tqdm import tqdm
 from spacy.tokens import DocBin
 import spacy
-
-def load_data(file):
-    with open(file, "r", encoding='utf-8') as f:
-        data = json.load(f)
-    return (data)
-
-def save_data(file, data):
-    with open(file, "w", encoding='utf-8') as f:
-        json.dump(data, f, indent=4)
+from helpers.json_functions import load_data, save_data
 
 
 patterns = [

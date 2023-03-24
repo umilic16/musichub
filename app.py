@@ -16,7 +16,6 @@ def request_data(message):
     # Retrieve information about music topic using OpenAI API
     # info = get_music_info(message)
 
-
 def play_music(message):
     print("You triggered play_music!")
     print(message)

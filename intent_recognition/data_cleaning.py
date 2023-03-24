@@ -1,8 +1,7 @@
 import json
+from helpers.json_functions import load_data, save_data
 
-# Read the JSON file into a Python object
-with open("data/train-v2.0.json", 'r') as f:
-    data = json.load(f)
+data = load_data('data/train-v2.0.json')
 
 def filter_json(original_json):
     new_data = []
@@ -49,6 +48,6 @@ def reformat_questions():
 data = reformat_questions()
 
 # Write the updated data object back to the JSON file
-with open("data/train-v2.0.json", 'w') as f:
-    json.dump(data, f)
+save_data('data/train-v2.0.json', data)
+
 

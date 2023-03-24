@@ -1,0 +1,22 @@
+{
+    "best": {
+        "version": "v1.0",
+        "F-score": "89.8%",
+        "precision": "89.44%",
+        "recall": "90.15%"
+    },
+    "all-models": [
+        {
+            "version": "v1.0",
+            "F-score": "89.8%",
+            "precision": "89.44%",
+            "recall": "90.15%"
+        },
+        {
+            "version": "v1.1",
+            "F-score": "86.16%",
+            "precision": "85.57%",
+            "recall": "86.75%"
+        }
+    ]
+}
