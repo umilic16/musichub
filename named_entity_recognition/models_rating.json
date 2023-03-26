@@ -31,6 +31,12 @@
             "recall": "88.26%"
         },
         {
+            "version": "v2.2",
+            "F-score": "87.33%",
+            "precision": "87.20%",
+            "recall": "87.45%"
+        },
+        {
             "version": "v1.3",
             "F-score": "86.63%",
             "precision": "85.30%",

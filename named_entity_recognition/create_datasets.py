@@ -2,6 +2,7 @@ import os
 import csv
 import re
 import pandas as pd
+import json
 
 # functions for extracting information from multiple datasources from keggle and wiki
 
@@ -10,18 +11,45 @@ columns_to_extract = {'artist': 'artists', 'producer': 'artists', 'writer': 'art
                       'album': 'albums', 'genre': 'genres', 'subgenre': 'genres', 'song': 'songs'}
 
 
-def create_output_files(folderpath):
+def create_output_files(folderpath: str) -> None:
+    """
+    Creates output files in the specified folder and writes headers to each file.
+
+    If the specified folder does not exist, it will be created.
+
+    Args:
+        folderpath: A string representing the path to the output folder.
+
+    Returns:
+        None
+    """
     # Create output folder if it doesnt exist
     if not os.path.exists(folderpath):
         os.makedirs(folderpath)
     # create output files and write headers
-    for column, output in columns_to_extract.items():
+    for _, output in columns_to_extract.items():
         with open(f'{folderpath}/{output}.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([output])
 
 
-def write_outputs(source_path, output_path):
+
+def write_outputs(source_path: str, output_path: str) -> None:
+    """
+    Reads in CSV files from the specified source directory and extracts columns based on the 'columns_to_extract' dictionary.
+    Then, writes the extracted columns to separate CSV files in the specified output directory.
+    If the output directory does not exist, it will be created.
+
+    Args:
+        source_path: A string representing the path to the directory containing the input CSV files.
+        output_path: A string representing the path to the directory where the extracted data will be written.
+
+    Returns:
+        None
+
+    Raises:
+        Exception: If there is an error while processing the files.
+    """
     try:
         if not os.path.exists(source_path):
             print(f'Source directory: {source_path} doesnt exist')
@@ -56,7 +84,19 @@ def write_outputs(source_path, output_path):
         print(ex)
 
 
-def remove_duplicates(folder_path):
+def remove_duplicates(folder_path: str) -> None:
+    """
+    Removes duplicate rows from CSV files in a given folder.
+
+    Args:
+        folder_path: A string representing the path to the folder containing the CSV files.
+
+    Returns:
+        None.
+
+    Raises:
+        Exception: If there is an error while removing the duplicates.
+    """
     try:
         if not os.path.exists(folder_path):
             print(f'Source directory: {folder_path} doesnt exist')
@@ -75,7 +115,22 @@ def remove_duplicates(folder_path):
         print(ex)
 
 
-def split_multiple_genres(folder_path):
+def split_multiple_genres(folder_path: str) -> None:
+    """
+    Splits multiple genres in the 'genres.csv' file into separate rows.
+    The 'genres.csv' file should contain a column of genres, and has rows with single or multiple genres separated by commas or slashes.
+    This function reads the file, splits any genres that contain commas or slashes into separate rows, and
+    writes the updated rows back to the file. If the file does not contain any multiple genres, it is left unchanged.
+
+    Args:
+        folder_path: A string representing the path to the folder containing the 'genres.csv' file.
+
+    Returns:
+        None
+        
+    Raises:
+        Exception: If there is an error while processing genres.
+    """
     try:
         if not os.path.exists(folder_path):
             print(f'Source directory: {folder_path} doesnt exist')
@@ -104,7 +159,23 @@ def split_multiple_genres(folder_path):
         print(ex)
 
 
-def split_multiple_artists(folder_path):
+def split_multiple_artists(folder_path: str) -> None:
+    """
+    Splits multiple artists in the "artists.csv" file found in the given folder path into separate rows.
+    The "artists.csv" file should contain a column of artist names, and has rows with single or multiple artists separated by keywords 
+    such as "ft.", "feat.", "featuring" or "x" etc.
+    This function reads the file, splits any rows that contain multiple artists based on the specified regular expression pattern, 
+    and writes the updated rows back to the file with unique artists in each row. If the file does not contain any rows with multiple artists, it is left unchanged.
+    
+    Args:
+        folder_path (str): The file path of the directory containing the "artists.csv" file to be processed.
+
+    Returns:
+        None
+
+    Raises:
+        Exception: If there is an error while processing artists.
+    """
     try:
         if not os.path.exists(folder_path):
             print(f'Source directory: {folder_path} doesnt exist')

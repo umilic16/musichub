@@ -1,0 +1,52 @@
+{
+    "best": {
+        "version": "v2.1",
+        "F-score": "89.80%",
+        "precision": "90.41%",
+        "recall": "89.19%"
+    },
+    "all-models": [
+        {
+            "version": "v2.1",
+            "F-score": "89.80%",
+            "precision": "90.41%",
+            "recall": "89.19%"
+        },
+        {
+            "version": "v2.7",
+            "F-score": "89.66%",
+            "precision": "90.32%",
+            "recall": "89.01%"
+        },
+        {
+            "version": "v2.2",
+            "F-score": "89.43%",
+            "precision": "88.58%",
+            "recall": "90.29%"
+        },
+        {
+            "version": "v2.3",
+            "F-score": "88.48%",
+            "precision": "89.08%",
+            "recall": "87.88%"
+        },
+        {
+            "version": "v2.5",
+            "F-score": "88.30%",
+            "precision": "88.71%",
+            "recall": "87.90%"
+        },
+        {
+            "version": "v2.6",
+            "F-score": "88.21%",
+            "precision": "88.97%",
+            "recall": "87.46%"
+        },
+        {
+            "version": "v2.4",
+            "F-score": "85.90%",
+            "precision": "84.73%",
+            "recall": "87.09%"
+        }
+    ]
+}

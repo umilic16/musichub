@@ -19,7 +19,7 @@ def rate_models(folderpath: str) -> dict:
     for folder in os.listdir(folderpath):
         meta = load_data(f'{folderpath}/{folder}/model-best/meta.json')
         if meta is None:
-            break
+            continue
         f_score = meta['performance']['ents_f'] * 100
         precision = meta['performance']['ents_p'] * 100
         recall = meta['performance']['ents_r'] * 100
@@ -29,6 +29,7 @@ def rate_models(folderpath: str) -> dict:
     data = sorted(data, key=lambda item: item['F-score'], reverse=True)
     data = [{'version': entry['version'], 'F-score': f'{entry["F-score"]:.2f}%', 'precision': f'{entry["precision"]:.2f}%', 'recall': f'{entry["recall"]:.2f}%'}
               for entry in data]
+    # print(data)
     result = {}
     result['best'] = data[0]
     result['all-models'] = data
