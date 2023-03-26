@@ -2,8 +2,19 @@ import os
 import sys
 sys.path.append('../')
 from helpers.json_functions import load_data, save_data
+from typing import Dict, List
 
-def rate_models(folderpath):
+def rate_models(folderpath: str) -> dict:
+    """
+    Returns a dictionary containing performance metrics of all the models found in the folderpath and identifies the 
+    best performing model by F-score.
+
+    Args:
+        folderpath (str): The path of the directory that contains the model-best directory of each model.
+
+    Returns:
+        dict: A dictionary containing the best performing model and all the models found in the folderpath along with their performance metrics.
+    """
     data = []
     for folder in os.listdir(folderpath):
         meta = load_data(f'{folderpath}/{folder}/model-best/meta.json')
@@ -24,3 +35,4 @@ def rate_models(folderpath):
     return result
 
 save_data('models_rating.json', rate_models('models/mh_ner'))
+save_data('models_rating_gc.json', rate_models('../google_colab_training/'))

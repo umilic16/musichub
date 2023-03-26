@@ -31,7 +31,7 @@ def play_music(message):
 
 
 mappings = {'request_data': request_data, 'play_music': play_music}
-assistant = GenericAssistant(intent_methods=mappings, model_name="test_model", responses="training/data/responses.json")
+assistant = GenericAssistant(intent_methods=mappings, model_name="test_model", responses="intent_recognition/data/responses.json")
 assistant.load_model("training/models")
 
 
