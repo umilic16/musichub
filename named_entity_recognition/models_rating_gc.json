@@ -2,51 +2,67 @@
     "best": {
         "version": "v2.1",
         "F-score": "89.80%",
-        "precision": "90.41%",
-        "recall": "89.19%"
+        "precision": "90.41",
+        "recall": "89.19%",
+        "tok2vec_loss": "361.74",
+        "ner_loss": "5609.52"
     },
     "all-models": [
         {
             "version": "v2.1",
             "F-score": "89.80%",
-            "precision": "90.41%",
-            "recall": "89.19%"
+            "precision": "90.41",
+            "recall": "89.19%",
+            "tok2vec_loss": "361.74",
+            "ner_loss": "5609.52"
         },
         {
             "version": "v2.7",
             "F-score": "89.66%",
-            "precision": "90.32%",
-            "recall": "89.01%"
+            "precision": "90.32",
+            "recall": "89.01%",
+            "tok2vec_loss": "6838.26",
+            "ner_loss": "6416.16"
         },
         {
             "version": "v2.2",
             "F-score": "89.43%",
-            "precision": "88.58%",
-            "recall": "90.29%"
+            "precision": "88.58",
+            "recall": "90.29%",
+            "tok2vec_loss": "0.16",
+            "ner_loss": "2.86"
         },
         {
             "version": "v2.3",
             "F-score": "88.48%",
-            "precision": "89.08%",
-            "recall": "87.88%"
+            "precision": "89.08",
+            "recall": "87.88%",
+            "tok2vec_loss": "0.57",
+            "ner_loss": "7.21"
         },
         {
             "version": "v2.5",
             "F-score": "88.30%",
-            "precision": "88.71%",
-            "recall": "87.90%"
+            "precision": "88.71",
+            "recall": "87.90%",
+            "tok2vec_loss": "0.78",
+            "ner_loss": "9.40"
         },
         {
             "version": "v2.6",
             "F-score": "88.21%",
-            "precision": "88.97%",
-            "recall": "87.46%"
+            "precision": "88.97",
+            "recall": "87.46%",
+            "tok2vec_loss": "0.12",
+            "ner_loss": "2.42"
         },
         {
             "version": "v2.4",
             "F-score": "85.90%",
-            "precision": "84.73%",
-            "recall": "87.09%"
+            "precision": "84.73",
+            "recall": "87.09%",
+            "tok2vec_loss": "0.23",
+            "ner_loss": "1.74"
         }
     ]
 }

@@ -1,10 +1,10 @@
-from helpers.json_functions import load_data, save_data
 import random
 from tqdm import tqdm
 from spacy.tokens import DocBin
 import spacy
 import sys
 sys.path.append('../')
+from helpers.json_functions import load_data, save_data
 
 
 patterns = [
@@ -477,25 +477,27 @@ def split_train_val_data(filepath: str, split: float) -> tuple[list, list]:
 
 
 # albums_data_tr, albums_data_val = split_train_val_data(
-#     'data/albums.json', 0.7)
+#     'data/music_data/albums.json', 0.7)
 
 # artists_data_tr, artists_data_val = split_train_val_data(
-#     'data/artists.json', 0.7)
+#     'data/music_data/artists.json', 0.7)
 
 # genres_data_tr, genres_data_val = split_train_val_data(
-#     'data/genres.json', 0.7)
+#     'data/music_data/genres.json', 0.7)
 
 # instruments_data_tr, instruments_data_val = split_train_val_data(
-#     'data/instruments.json', 0.7)
+#     'data/music_data/instruments.json', 0.7)
 
 # songs_data_tr, songs_data_val = split_train_val_data(
-#     'data/songs.json', 0.7)
+#     'data/music_data/songs.json', 0.7)
+
 
 # export_data_to_json('data/training_data.json', albums_data_tr,
 #                     artists_data_tr, genres_data_tr, instruments_data_tr, songs_data_tr)
 # print('Saved training data\nConverting .json training data to .spacy format')
 # convert_to_spacy('data/training_data.json',
 #                  'data/training_data_v2.spacy', 0, 700000)
+
 
 # export_data_to_json('data/validation_data.json', albums_data_val,
 #                     artists_data_val, genres_data_val, instruments_data_val, songs_data_val)

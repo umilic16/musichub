@@ -2,7 +2,7 @@ import os
 import sys
 sys.path.append('../')
 from helpers.json_functions import load_data, save_data
-from typing import Dict, List
+
 
 def rate_models(folderpath: str) -> dict:
     """
@@ -20,20 +20,23 @@ def rate_models(folderpath: str) -> dict:
         meta = load_data(f'{folderpath}/{folder}/model-best/meta.json')
         if meta is None:
             continue
-        f_score = meta['performance']['ents_f'] * 100
-        precision = meta['performance']['ents_p'] * 100
-        recall = meta['performance']['ents_r'] * 100
-        value = {'version': folder, 'F-score': f_score, 'precision': precision, 'recall': recall}
+        performance = meta['performance']
+        f_score = performance['ents_f'] * 100
+        precision = performance['ents_p'] * 100
+        recall = performance['ents_r'] * 100
+        tok2vec_loss = performance['tok2vec_loss']
+        ner_loss = performance['ner_loss']
+        value = {'version': folder, 'F-score': f'{f_score:.2f}%', 'precision': f'{precision:.2f}',
+                 'recall': f'{recall:.2f}%', 'tok2vec_loss': f'{tok2vec_loss:.2f}', 'ner_loss': f'{ner_loss:.2f}'}
         # print(value)
         data.append(value)
     data = sorted(data, key=lambda item: item['F-score'], reverse=True)
-    data = [{'version': entry['version'], 'F-score': f'{entry["F-score"]:.2f}%', 'precision': f'{entry["precision"]:.2f}%', 'recall': f'{entry["recall"]:.2f}%'}
-              for entry in data]
     # print(data)
     result = {}
     result['best'] = data[0]
     result['all-models'] = data
     return result
+
 
 save_data('models_rating.json', rate_models('models/mh_ner'))
 save_data('models_rating_gc.json', rate_models('../google_colab_training/'))
