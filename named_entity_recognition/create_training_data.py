@@ -9,21 +9,26 @@ from helpers.json_functions import load_data, save_data
 
 patterns = [
     "Play",
-    "Play",
-    "Play",
     "Hello give me",
     "Play",
     "Can you play",
-    "Play",
-    "Play",
     "Give me some",
-    "Hi, can u play",
-    "Play",
+    "hi, can u play",
+    "hello can u play me",
+    "Hi, play me",
+    "Hi musichub, can you play me",
+    "Hello! Are you able to play me",
+    "can you play me",
+    "Play me",
+    "Hey music hub! Play me",
+    "hi can u play me",
+    "sup music hub play me",
+    "play",
     "Hello my friend, im fealing great today can u play",
     "Hello how are you doin, im here for some",
     "im here for",
     "Hi bro can u play",
-    "Hi can you play me"
+    "Hi can you play me",
     "Play some music",
     "Hey Music Hub, gimme some",
     "Hey MusicHub, play",
@@ -31,7 +36,7 @@ patterns = [
     "I'm feeling nostalgic. Can you play",
     "Hey Music Hub, can you play",
     "Hey MusicHub, can you play",
-    "Can you play",
+    "can you play",
     "I'm in the mood for some",
     "Play some of",
     "Give me something",
@@ -39,6 +44,8 @@ patterns = [
     "lets play some",
     "Gimme",
     "Gimme some",
+    "Play",
+    "play",
     "I want to listen to",
     "Can you play some",
     "I'm feeling like some",
@@ -47,20 +54,22 @@ patterns = [
     "put some",
     "Yo music hub, play",
     "Sup music hub can u play",
+    "play",
+    "Play",
     "whats up music hub play me",
     "hi music hub, lets hear",
     "i want",
-    "i need"
+    "i need",
     "give me some",
     "i wanna hear some",
     "lets hear a",
-    "play",
+    "play me",
     "Play",
     "play some",
     "Hi, play",
     "Hello, play",
     "Hi MusicHub! Can u play",
-    "Hello musichub, play"
+    "Hello musichub, play",
 ]
 
 album_am = ["", "", "", "-", "-", "by", "from", ",", "by", "from"]
@@ -475,21 +484,22 @@ def split_train_val_data(filepath: str, split: float) -> tuple[list, list]:
     data_val = data[n+1:]
     return data_tr, data_val
 
+# split = 0.7
 
 # albums_data_tr, albums_data_val = split_train_val_data(
-#     'data/music_data/albums.json', 0.7)
+#     'data/music_data/albums.json', split)
 
 # artists_data_tr, artists_data_val = split_train_val_data(
-#     'data/music_data/artists.json', 0.7)
+#     'data/music_data/artists.json', split)
 
 # genres_data_tr, genres_data_val = split_train_val_data(
-#     'data/music_data/genres.json', 0.7)
+#     'data/music_data/genres.json', split)
 
 # instruments_data_tr, instruments_data_val = split_train_val_data(
-#     'data/music_data/instruments.json', 0.7)
+#     'data/music_data/instruments.json', split)
 
 # songs_data_tr, songs_data_val = split_train_val_data(
-#     'data/music_data/songs.json', 0.7)
+#     'data/music_data/songs.json', split)
 
 
 # export_data_to_json('data/training_data.json', albums_data_tr,

@@ -3,7 +3,7 @@
 *.old/
 requirements*.txt
 hyperparameters*.txt
-models/
+# models/
 training_data.json
 validation_data.json
 google_colab_training/
