@@ -8,68 +8,69 @@ from helpers.json_functions import load_data, save_data
 
 
 patterns = [
-    "Play",
-    "Hello give me",
-    "Play",
-    "Can you play",
-    "Give me some",
-    "hi, can u play",
-    "hello can u play me",
-    "Hi, play me",
-    "Hi musichub, can you play me",
-    "Hello! Are you able to play me",
-    "can you play me",
-    "Play me",
-    "Hey music hub! Play me",
+    # "Play",
+    # "Hello give me",
+    # "Play",
+    # "Can you play",
+    # "Give me some",
+    # "hi, can u play",
+    # "hello can u play me",
+    # "Hi, play me",
+    # "Hi musichub, can you play me",
+    # "Hello! Are you able to play me",
+    # "can you play me",
+    # "Play me",
+    # "Hey music hub! Play me",
     "hi can u play me",
     "sup music hub play me",
-    "play",
-    "Hello my friend, im fealing great today can u play",
-    "Hello how are you doin, im here for some",
-    "im here for",
-    "Hi bro can u play",
-    "Hi can you play me",
-    "Play some music",
-    "Hey Music Hub, gimme some",
-    "Hey MusicHub, play",
+    # "play",
+    # "Hello my friend, im fealing great today can u play",
+    # "Hello how are you doin, im here for some",
+    # "im here for",
+    # "Hi bro can u play",
+    # "Hi can you play me",
+    # "Play some music",
+    # "Hey Music Hub, gimme some",
+    # "Hey MusicHub, play",
     "I'm in the mood for some music. Can you play",
     "I'm feeling nostalgic. Can you play",
-    "Hey Music Hub, can you play",
-    "Hey MusicHub, can you play",
+    # "Hey Music Hub, can you play",
+    # "Hey MusicHub, can you play",
     "can you play",
-    "I'm in the mood for some",
+    # "I'm in the mood for some",
     "Play some of",
-    "Give me something",
-    "Can you play some",
+    # "Give me something",
+    # "Can you play some",
     "lets play some",
     "Gimme",
     "Gimme some",
-    "Play",
-    "play",
+    # "Play",
+    # "play",
     "I want to listen to",
     "Can you play some",
     "I'm feeling like some",
-    "Can you put on some",
-    "I'm in the mood for",
-    "put some",
-    "Yo music hub, play",
-    "Sup music hub can u play",
-    "play",
-    "Play",
-    "whats up music hub play me",
-    "hi music hub, lets hear",
-    "i want",
-    "i need",
+    # "Can you put on some",
+    # "I'm in the mood for",
+    # "put some",
+    # "Yo music hub, play",
+    # "Sup music hub can u play",
+    # "play",
+    # "Play",
+    # "whats up music hub play me",
+    # "hi music hub, lets hear",
+    # "hello music hub, lets play",
+    # "i want",
+    # "i need",
     "give me some",
     "i wanna hear some",
-    "lets hear a",
-    "play me",
-    "Play",
+    # "lets hear a",
+    # "play me",
+    # "Play",
     "play some",
-    "Hi, play",
-    "Hello, play",
-    "Hi MusicHub! Can u play",
-    "Hello musichub, play",
+    # "Hi, play",
+    # "Hello, play",
+    # "Hi MusicHub! Can u play",
+    # "Hello musichub, play",
 ]
 
 album_am = ["", "", "", "-", "-", "by", "from", ",", "by", "from"]
@@ -423,11 +424,11 @@ def export_data_to_json(filepath: str, albums: list, artists: list, genres: list
         None
     """
     data = []
-    data.append(generate_albums_td(albums, artists, songs))
-    data.append(generate_artists_td(albums, artists, songs))
-    data.append(generate_genres_td(genres))
-    data.append(generate_instruments_td(instruments))
-    data.append(generate_songs_td(albums, artists, songs))
+    data.extend(generate_albums_td(albums, artists, songs))
+    data.extend(generate_artists_td(albums, artists, songs))
+    data.extend(generate_genres_td(genres))
+    data.extend(generate_instruments_td(instruments))
+    data.extend(generate_songs_td(albums, artists, songs))
 
     random.shuffle(data)
     save_data(filepath, data)
@@ -447,6 +448,7 @@ def convert_to_spacy(json_file_path: str, spacy_file_path: str, data_start_pt: i
     Returns:
         None
     """
+    print('Converting .json data to .spacy format')
     data = load_data(json_file_path)
     if data is not None:
         nlp = spacy.blank("en")
@@ -484,33 +486,32 @@ def split_train_val_data(filepath: str, split: float) -> tuple[list, list]:
     data_val = data[n+1:]
     return data_tr, data_val
 
-# split = 0.7
 
-# albums_data_tr, albums_data_val = split_train_val_data(
-#     'data/music_data/albums.json', split)
+split = 0.7
 
-# artists_data_tr, artists_data_val = split_train_val_data(
-#     'data/music_data/artists.json', split)
+albums_data_tr, albums_data_val = split_train_val_data(
+    'data/music_data/albums.json', split)
 
-# genres_data_tr, genres_data_val = split_train_val_data(
-#     'data/music_data/genres.json', split)
+artists_data_tr, artists_data_val = split_train_val_data(
+    'data/music_data/artists.json', split)
 
-# instruments_data_tr, instruments_data_val = split_train_val_data(
-#     'data/music_data/instruments.json', split)
+genres_data_tr, genres_data_val = split_train_val_data(
+    'data/music_data/genres.json', split)
 
-# songs_data_tr, songs_data_val = split_train_val_data(
-#     'data/music_data/songs.json', split)
+instruments_data_tr, instruments_data_val = split_train_val_data(
+    'data/music_data/instruments.json', split)
 
-
-# export_data_to_json('data/training_data.json', albums_data_tr,
-#                     artists_data_tr, genres_data_tr, instruments_data_tr, songs_data_tr)
-# print('Saved training data\nConverting .json training data to .spacy format')
-# convert_to_spacy('data/training_data.json',
-#                  'data/training_data_v2.spacy', 0, 700000)
+songs_data_tr, songs_data_val = split_train_val_data(
+    'data/music_data/songs.json', split)
 
 
-# export_data_to_json('data/validation_data.json', albums_data_val,
-#                     artists_data_val, genres_data_val, instruments_data_val, songs_data_val)
-# print('Saved validation data\nConverting .json validation data to .spacy format')
-# convert_to_spacy('data/validation_data.json',
-#                  'data/validation_data_v2.spacy', 0, 300000)
+export_data_to_json('data/training_data_ft.json', albums_data_tr,
+                    artists_data_tr, genres_data_tr, instruments_data_tr, songs_data_tr)
+convert_to_spacy('data/training_data_ft.json',
+                 'data/training_data_ft.spacy', 0, 70000)
+
+
+export_data_to_json('data/validation_data_ft.json', albums_data_val,
+                    artists_data_val, genres_data_val, instruments_data_val, songs_data_val)
+convert_to_spacy('data/validation_data_ft.json',
+                 'data/validation_data_ft.spacy', 0, 30000)

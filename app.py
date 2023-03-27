@@ -3,7 +3,7 @@ from intent_recognition.neuralintents import GenericAssistant
 import spacy
 from spacy import displacy
 
-nlp = spacy.load("en_core_web_trf")
+nlp = spacy.load("named_entity_recognition/models/mh_ner/v2.0/model-best")
 
 def named_entity_recoqnition(message):
     doc = nlp(message)
@@ -32,13 +32,13 @@ def play_music(message):
 
 mappings = {'request_data': request_data, 'play_music': play_music}
 assistant = GenericAssistant(intent_methods=mappings, model_name="test_model", responses="intent_recognition/data/responses.json")
-assistant.load_model("training/models")
+assistant.load_model("intent_recognition/models")
 
 
 while True:
     # Receive input from user
     user_input = input("Enter a message: ")
-    if user_input == "STOP":
+    if user_input.lower() == "stop":
         break
     else:
         # Use intent recognition model to determine user's intent

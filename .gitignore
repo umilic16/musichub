@@ -1,12 +1,14 @@
 # training_data, models, unimportant files 
 # and large files that can be generated using created functions
 *.old/
-requirements*.txt
 hyperparameters*.txt
 # models/
 training_data.json
 validation_data.json
 google_colab_training/
+*_ft*
+named_entity_recognition/models/mh_ner/v2.1/
+
 
 
 

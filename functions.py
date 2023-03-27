@@ -33,25 +33,18 @@ def play_song(song_name):
     This function takes in a song name as input and plays the song
     using the YouTube API.
     """
+    request = youtube.search().list(
+        part="snippet",
+        maxResults=1,
+        q=song_name,
+        type="video",
+        videoEmbeddable=True,
+    )
+    response = request.execute()
+
     try:
-        # Search for song on YouTube
-        search_response = youtube.search().list(
-            q=song_name,
-            type='video',
-            part='id,snippet',
-            maxResults=1
-        ).execute()
-
-        # Get video ID of first search result
-        video_id = search_response['items'][0]['id']['videoId']
-
-        # Construct YouTube link
-        link = f'https://www.youtube.com/watch?v={video_id}'
-
-        # Return link to video
+        video_id = response['items'][0]['id']['videoId']
+        link = f"https://www.youtube.com/watch?v={video_id}"
         return link
-
-    except HttpError as e:
-        # Handle API errors
-        print(f"An error occurred: {e}")
-        return None
+    except HttpError as he:
+        print(he)
