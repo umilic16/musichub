@@ -61,7 +61,7 @@ The intents.json file contains tags and patterns for each intent. The tags are t
                     "Hey Music Hub, gimme some rock",
                     "Can you put on some electronic dance music, please?"
                 ]
-There are also intents that are not music related, like "greeting", "goodbye", "thanks" etc. The model is trained to recognize these intents as well, and respond accordingly.
+There are also intents that are not music related, like "greeting", "goodbye", "thanks" etc. The model is trained to recognize these intents as well, and respond accordingly. For these intents the responses are predefined and can be found in responses.json file.
 ### Named entity recognition model
 Named entity recognition model is trained using the **spacy** library ([link](https://spacy.io/)). To train the named entity recognition model, run the spacy CLI command 
 ```bash
