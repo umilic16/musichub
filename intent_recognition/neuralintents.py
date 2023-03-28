@@ -105,7 +105,7 @@ class GenericAssistant():
                            optimizer=sgd, metrics=['accuracy'])
 
         self.hist = self.model.fit(np.array(train_x), np.array(
-            train_y), epochs=50, batch_size=5, verbose=1, validation_data=(np.array(val_x), np.array(val_y)))
+            train_y), epochs=50, batch_size=64, verbose=1, validation_data=(np.array(val_x), np.array(val_y)))
 
         plt.subplot(1, 2, 1)
         plt.plot(self.hist.history['loss'])

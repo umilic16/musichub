@@ -7,7 +7,6 @@ training_data.json
 validation_data.json
 google_colab_training/
 *_ft*
-named_entity_recognition/models/mh_ner/v2.1/
 
 
 
