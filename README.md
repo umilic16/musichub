@@ -75,11 +75,11 @@ or in this case, the last model is trained using following command inside the na
 ```bash
 python -m spacy train spacy_config.cfg -o models/mh_ner/v2.2
 ```
-You can change the named entity recognition model hyperparameters in the [`spacy_config.cfg`](./named_entity_recognition/spacy_config.cfg) file or edit the training data by editing the files inside the [music_data](named_entity_recognition/data/music_data) folder. To create examples for model training run the following command inside the named_entity_recognition folder:
+You can change the named entity recognition model hyperparameters in the [`spacy_config.cfg`](named_entity_recognition/spacy_config.cfg) file or edit the training data by editing the files inside the [music_data](named_entity_recognition/data/music_data) folder. To create examples for model training run the following command inside the named_entity_recognition folder:
 ```bash
 python create_training_data.py
 ```
-This will create files training_data.json and validation_data.json inside the [data](./named_entity_recognition/data) folder, as well as training_data.spacy and validation_data.spacy that the model will use to train and validate. The json files will contain examples for all the different entities (songs, albums etc.) like:
+This will create files training_data.json and validation_data.json inside the [data](named_entity_recognition/data) folder, as well as training_data.spacy and validation_data.spacy that the model will use to train and validate. The json files will contain examples for all the different entities (songs, albums etc.) like:
 
     "Play me song_name by artist_name",
     "Hi, I want to listen to album_name",
