@@ -59,7 +59,7 @@ Named entity recognition model is trained using the [**`spaCy`**](https://spacy.
 python -m spacy download en_core_web_lg
 ```
 To change the named entity recognition model hyperparameters, you can edit the [spacy_config.cfg](named_entity_recognition/spacy_config.cfg) file.
-To train the named entity recognition model, run the spaCy CLI command for training [learn more](https://spacy.io/api/cli#train) 
+To train the named entity recognition model, run the spaCy CLI command for training ([learn more](https://spacy.io/api/cli#train)): 
 ```bash
 python -m spacy train config_path --o output_path
 ```
@@ -95,7 +95,7 @@ as well as labeled entities for each example. Let's take a look:
             ]
         }
     
-The spacy files will contain the same examples but in a format that the spacy library can use to train the model. To speed up the training process you can generate a file that contains the labels in the data. This helps speed up the training process, since spaCy won’t have to preprocess the data to extract the labels. This can be done by running the following spaCy CLI command [learn more](https://spacy.io/api/cli#init-labels):
+The spacy files will contain the same examples but in a format that the spacy library can use to train the model. To speed up the training process you can generate a file that contains the labels in the data. This helps speed up the training process, since spaCy won’t have to preprocess the data to extract the labels. This can be done by running the following spaCy CLI command ([learn more](https://spacy.io/api/cli#init-labels)):
 ```bash
 python -m spacy init labels config_path output_path
 ```
