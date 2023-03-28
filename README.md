@@ -99,7 +99,7 @@ The spacy files will contain the same examples but in a format that the spacy li
 ```bash
 python -m spacy init labels config_path output_path
 ```
-in this project the labels are initialized like this:
+or in this case, the labels are initialized by running the following command inside the named_entity_recognition folder:
 ```bash
 python -m spacy init labels spacy_config.cfg data/ner_labels
 ```
