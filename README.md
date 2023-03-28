@@ -29,7 +29,7 @@ The intent recognition model is trained by running the following command inside 
 ```python
 python train_model.py
 ```
-Code for training the intent recognition model is from **neuralintents** library, with small changes ([link](https://github.com/NeuralNine/neuralintents) to original code). You can change the intent recognition model hyperparameters in the neuralintents.py file or add more intents by editing the intents.json file. The model is a sequential model with 3 dense layers and 2 dropout layers in between. The model is compiled using the SGD optimizer with a learning rate of 0.005, and trained for 50 epochs with a batch size of 64. The model is trained on 80% of the data and validated on 20% of the data. The model is trained to predict the intent of the user input using the following code:
+Code for training the intent recognition model is from **neuralintents** library, with small changes ([link](https://github.com/NeuralNine/neuralintents) to original code). You can change the intent recognition model hyperparameters in the neuralintents.py file or add more intents by editing the intents.json file. The model is a sequential model with 3 dense layers and 2 dropout layers in between. The model is compiled using SGD optimizer with learning rate of 0.005, and categorical crossentropy loss function. The model is trained for 100 epochs with batch size of 8. The model is trained on 80% of the data and validated on 20% of the data. You can change the hyperparameters in the following code:
 ```python
         train_x, val_x, train_y, val_y = train_test_split(x, y, test_size=0.2, random_state=42)
 
@@ -43,7 +43,7 @@ Code for training the intent recognition model is from **neuralintents** library
         sgd = SGD(learning_rate=0.005, decay=1e-6, momentum=0.9, nesterov=True)
         self.model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
-        self.hist = self.model.fit(np.array(train_x), np.array(train_y), epochs=50, batch_size=64 verbose=1, validation_data=(np.array(val_x), np.array(val_y)))
+        self.hist = self.model.fit(np.array(train_x), np.array(train_y), epochs=100, batch_size=8 verbose=1, validation_data=(np.array(val_x), np.array(val_y)))
 ```
 The intents.json file contains tags and patterns for each intent. The tags are the intents that the patterns represent, and the patterns represent different forms of user input. For example:
 

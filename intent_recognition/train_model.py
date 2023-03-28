@@ -1,5 +1,5 @@
 from neuralintents import GenericAssistant
 
-assistant = GenericAssistant('data/intents.json', model_name="test_model")
+assistant = GenericAssistant('data/intents.json', model_name="intent_recognition")
 assistant.train_model()
 assistant.save_model()
