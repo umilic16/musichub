@@ -5,9 +5,6 @@ hyperparameters*.txt
 # models/
 training_data.json
 validation_data.json
-google_colab_training/
-*_ft*
-test.py
 
 
 
