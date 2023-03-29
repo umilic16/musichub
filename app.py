@@ -14,11 +14,19 @@ def named_entity_recoqnition(message):
 
 def request_data(message):
     response = generate_response(message)
+    print("requested data")
     return response
 
 
 def play_music(message):
     entities = named_entity_recoqnition(message)
+    print(entities)
+    if len(entities) == 0:
+        # TO DO - Handle when no entities are found in user's input
+        pass
+    else:
+        entities = ' '.join(str(ent) for ent in entities)
+    print(entities)
     link = search_youtube(entities)
     if link is not None:
         print(f"Playing {entities}: {link}")
@@ -38,7 +46,7 @@ ir_model.load_model("intent_recognition/models", "intent_recognition")
 
 # Load the named entity recognition model
 ner_model = spacy.load(
-    "named_entity_recognition/models/mh_ner/v2.2/model-best")
+    "named_entity_recognition/models/v3.1/model-best")
 
 load_dotenv()
 youtube_api_key = os.getenv("YOUTUBE_API_KEY")
@@ -46,29 +54,31 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 youtube = build("youtube", "v3", developerKey=youtube_api_key)
 
+messages = [{"role": "system", "content": "You are an AI music assistant named MusicHub, an expert for music knowledge. You know everything about music (musicians, artists, songs, albums, composers, genres, instruments everything music-related), and you are designed to answer any music-related questions users may have. If the question is not music-related, you will respond with a message indicating that you are unable to provide a response."}]
 # Function to generate a response from OpenAI API
-
-
 def generate_response(prompt):
     """
     This function takes in a music related topic as input and returns
     information about that topic using the OpenAI API.
     """
-    # prompt = f'As an AI music assistant named MusicHub, I am designed to answer any music-related questions you may have. Please provide a clear and specific question or topic related to music in the prompt below. If the prompt is not music-related, I will respond with a message indicating that I am unable to provide a response. Here is the user\'s question: "{prompt}"'
+    messages.append({"role": "user", "content": prompt})
+    print(messages)
+    response = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages = messages,
+    max_tokens=100,
+    temperature=0.5,
+    stream=True 
+    )
+    collected_messages = []
+    # iterate through the stream of events
+    for chunk in response:
+        chunk_message = chunk['choices'][0]['delta']  # extract the message
+        collected_messages.append(chunk_message)  # save the message
 
-    try:
-        response = openai.Completion.create(
-            engine="davinci",
-            prompt=prompt,
-            max_tokens=50,
-            n=1,
-            stop=None,
-            temperature=0.5,
-        )
-        # print(response.choices[0].text)
-        return response.choices[0].text
-    except Exception as e:
-        print("Error:", e)
+    full_reply_content = ''.join([m.get('content', '') for m in collected_messages])
+    messages.append({"role": "assistant", "content": full_reply_content})
+    return full_reply_content
 
 
 # Function to search for a song on YouTube and return a link

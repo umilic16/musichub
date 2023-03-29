@@ -5,7 +5,7 @@ hyperparameters*.txt
 # models/
 training_data.json
 validation_data.json
-
+named_entity_recognition/models/v3.1/
 
 
 # Byte-compiled / optimized / DLL files

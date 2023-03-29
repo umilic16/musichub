@@ -90,7 +90,7 @@ class GenericAssistant():
 
         # Split the data into training and validation sets
         train_x, val_x, train_y, val_y = train_test_split(
-            x, y, test_size=0.2, random_state=42)
+            x, y, test_size=0.33, random_state=42)
 
         self.model = Sequential()
         self.model.add(Dense(256, input_shape=(
@@ -100,13 +100,13 @@ class GenericAssistant():
         self.model.add(Dropout(0.5))
         self.model.add(Dense(len(train_y[0]), activation='softmax'))
 
-        sgd = SGD(learning_rate=0.005, decay=1e-6, momentum=0.9, nesterov=True)
+        sgd = SGD(learning_rate=0.0033, decay=1e-6, momentum=0.9, nesterov=True)
         self.model.compile(loss='categorical_crossentropy',
                            optimizer=sgd, metrics=['accuracy'])
 
         self.hist = self.model.fit(np.array(train_x), np.array(
-            train_y), epochs=100, batch_size=8, verbose=1, validation_data=(np.array(val_x), np.array(val_y)))
-
+            train_y), epochs=300, batch_size=32, verbose=1, validation_data=(np.array(val_x), np.array(val_y)), shuffle=True)
+        
         plt.subplot(1, 2, 1)
         plt.plot(self.hist.history['loss'])
         plt.plot(self.hist.history['val_loss'])

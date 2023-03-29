@@ -74,28 +74,33 @@ patterns = [
     "Hello, play",
     "Hi MusicHub! Can u play",
     "Hello musichub, play",
+    "Im feeling that i want to listen to",
+    "I feel like listening to",
+    "I feel i want to hear",
+    "Im feeling that i want to hear"
 ]
 
-album_am = ["", "", "", "-", "-", "by", "from", ",", "by", "from"]
+album_am = ["", "", "-", "by", "from", ","]
 album_sm = ["", "", "-", ","]
 album_s = ["", "", "", "album", "please"]
 
 artist_p = ["", "", "", "", "", "popular", "new",
             "new popular", "fresh", "fire from", "good", "nice"]
-artist_m = ["", "", "", "-", ",", "'s", "s"]
+artist_m = ["", "", "", "-", ",", "'s", "s", "play", ", play"]
+artist_ma  = ["", "", "ft.", "ft", "feat", "feat.", "featuring", "x", "and", "with", ","]
 artist_sg = ["", "", "", "hit", "vibe", "tune", "songs",
              "hits", "tunes", "track", "tracks", "music", "please"]
 artist_ss = ["", "", "", "song"]
 artist_sa = ["", "", "", "album"]
 
-genre_p = ["", "", "", "", "" "popular", "new", "new popular", "fresh", "top"]
+genre_p = ["", "", "", "popular", "new", "new popular", "fresh", "top"]
 genre_s = ["", "", "", "song", "hit", "album", "vibe", "tune", "songs", "hits",
            "albums", "tunes", "track", "tracks", "music", "genre", "genres", "please"]
 
-instrument_s = ["", "", "", "vibe", "music", "sound", "music", "", ""]
+instrument_s = ["", "", "", "vibe", "music", "sound", "music", "please"]
 
-song_mal = ["", "", "", "-", "-", "from", ",", "from"]
-song_mar = ["", "", "", "-", "-", "by", "from", ",", "by", "from"]
+song_mal = ["", "", "-", ",", "from"]
+song_mar = ["", "", "-", "by", "from", ","]
 song_s = ["", "", "", "song", "please"]
 
 
@@ -205,11 +210,12 @@ def generate_artists_td(albums_data: list, artists_data: list, songs_data: list)
 
         entities = [(artist_start, artist_end, "MUSIC")]
 
-        choice = random.randint(1, 3)
+        choice = random.randint(1, 4)
         """
         1 - artist
         2 - artist album
         3 - artist song
+        4 - artist artist
         """
         if choice == 1:
             sufix = random.choice(artist_sg)
@@ -236,7 +242,7 @@ def generate_artists_td(albums_data: list, artists_data: list, songs_data: list)
             sufix = random.choice(artist_sa)
             if sufix:
                 text += " " + sufix
-        else:
+        elif choice == 3:
             song = random.choice(songs_data)
             mid = random.choice(album_sm)
             if mid:
@@ -252,6 +258,24 @@ def generate_artists_td(albums_data: list, artists_data: list, songs_data: list)
                 song_end = len(text)
                 entities.append((song_start, song_end, "MUSIC"))
             sufix = random.choice(artist_ss)
+            if sufix:
+                text += " " + sufix
+        else:
+            artist2 = random.choice(artists_data)
+            mid = random.choice(artist_ma)
+            if mid:
+                text += " " + mid + " "
+                artist2_start = len(text)
+                text += artist2
+                artist2_end = len(text)
+                entities.append((artist2_start, artist2_end, "MUSIC"))
+            else:
+                text += " "
+                artist2_start = len(text)
+                text += artist2
+                artist2_end = len(text)
+                entities.append((artist2_start, artist2_end, "MUSIC"))
+            sufix = random.choice(artist_ss + artist_sa)
             if sufix:
                 text += " " + sufix
 
@@ -511,10 +535,10 @@ songs_data_tr, songs_data_val = split_train_val_data(
 export_data_to_json('data/training_data.json', albums_data_tr,
                     artists_data_tr, genres_data_tr, instruments_data_tr, songs_data_tr)
 convert_to_spacy('data/training_data.json',
-                 'data/training_data.spacy', 0, 700000)
+                 'data/training_data.spacy', 0, 350000)
 
 
 export_data_to_json('data/validation_data.json', albums_data_val,
                     artists_data_val, genres_data_val, instruments_data_val, songs_data_val)
 convert_to_spacy('data/validation_data.json',
-                 'data/validation_data.spacy', 0, 300000)
+                 'data/validation_data.spacy', 0, 150000)
