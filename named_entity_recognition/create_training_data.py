@@ -37,36 +37,18 @@ patterns = [
     "Hey Music Hub, can you play",
     "Hey MusicHub, can you play",
     "can you play:",
-    "I'm in the mood for some",
     "Play some of",
     "Give me something",
     "Can you play some",
-    "lets play some",
-    "Gimme",
-    "Gimme some",
     "Play",
     "play",
-    "I want to listen to:",
-    "Can you play some",
-    "I'm feeling like some",
-    "Im feeling",
-    "Can you put on some",
-    "I'm in the mood for",
-    "put some",
     "Yo music hub, play",
     "Sup music hub can u play",
     "play:",
     "Play:",
     "whats up music hub play me",
-    "hi music hub, lets hear",
     "hello music hub, lets play",
-    "i want",
-    "i need",
-    "give me some",
-    "i wanna hear some",
     "lets hear a",
-    "I kinda want some",
-    "i want to listen to",
     "play me",
     "Play",
     "play some",
@@ -74,12 +56,34 @@ patterns = [
     "Hello, play",
     "Hi MusicHub! Can u play",
     "Hello musichub, play",
+    "Can you play some",
+    "lets play some",
+    "Can i get",
+    "Can i get some",
+    "I'm in the mood for some",
+    "Gimme",
+    "Gimme some",
+    "I want to listen to:",
+    "I'm feeling like some",
+    "Im feeling",
+    "Can you put on some",
+    "I'm in the mood for",
+    "put some",
+    "hi music hub, lets hear",
+    "i want",
+    "i need",
+    "give me some",
+    "i wanna hear some",
+    "I kinda want some",
+    "i want to listen to",
     "Im feeling that i want to listen to",
     "I feel like listening to",
     "I feel i want to hear",
     "Im feeling that i want to hear",
-    "Can i get",
-    "Can i get some",
+]
+
+patterns_2nd = [
+    "play"
 ]
 
 album_am = ["", "", "-", "by", "from", ","]
@@ -248,7 +252,7 @@ def generate_artists_td(albums_data: list, artists_data: list, songs_data: list)
             if sufix:
                 text += " " + sufix
         else:
-            mid = random.choice(album_sm)
+            mid = random.choice(artist_m)
             if mid:
                 text += " " + mid
             song = random.choice(songs_data)
@@ -485,11 +489,11 @@ songs_data_tr, songs_data_val = split_train_val_data(
 
 export_data_to_json('data/training_data.json', albums_data_tr,
                     artists_data_tr, genres_data_tr, instruments_data_tr, songs_data_tr)
-# convert_to_spacy('data/training_data.json',
-#                  'data/training_data.spacy', 0, 350000)
+convert_to_spacy('data/training_data.json',
+                 'data/training_data.spacy', 0, 350000)
 
 
 export_data_to_json('data/validation_data.json', albums_data_val,
                     artists_data_val, genres_data_val, instruments_data_val, songs_data_val)
-# convert_to_spacy('data/validation_data.json',
-#                  'data/validation_data.spacy', 0, 150000)
+convert_to_spacy('data/validation_data.json',
+                 'data/validation_data.spacy', 0, 150000)
