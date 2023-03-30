@@ -82,10 +82,6 @@ patterns = [
     "Im feeling that i want to hear",
 ]
 
-patterns_2nd = [
-    "play"
-]
-
 album_am = ["", "", "-", "by", "from", ","]
 album_sm = ["", "", "-", ","]
 album_s = ["", "", "", "album", "please"]
@@ -113,7 +109,7 @@ song_s = ["", "", "", "song", "please"]
 
 def label_entity(text: str, entity: str) -> tuple:
     """
-    Adds the text, and labels it as a MUSIC entity, with the start and end positions.
+    Adds the entity to the text and labels it as a MUSIC entity, with the start and end positions in the text.
 
     Args:
     - text (str): The text to add the entity to.
@@ -418,15 +414,15 @@ def export_data_to_json(filepath: str, albums: list, artists: list, genres: list
     print('Json data is saved and ready!')
 
 
-def convert_to_spacy(json_file_path: str, spacy_file_path: str, data_start_pt: int, data_end_pt: int) -> None:
+def convert_to_spacy(json_file_path: str, spacy_file_path: str, data_start_pt: int = 0, data_end_pt: int = -1) -> None:
     """
     Converts the data in the given JSON file (if the file exists) to Spacy format and saves it to the specified file path.
 
     Args:
-        json_file_path (str): The file path of the JSON file to be converted.
-        spacy_file_path (str): The file path where the Spacy data will be saved.
-        data_start_pt (int): The starting index of the data to be processed.
-        data_end_pt (int): The ending index of the data to be processed.
+        json_file_path (str): The file path of the JSON file containing the data.
+        spacy_file_path (str): The file path where the Spacy file will be saved.
+        data_start_pt (int): The index of the first data entry to be converted. Default value is 0.
+        data_end_pt (int): The index of the last data entry to be converted. Default value is -1, which means that all the data will be converted.
 
     Returns:
         None
@@ -436,6 +432,8 @@ def convert_to_spacy(json_file_path: str, spacy_file_path: str, data_start_pt: i
     if data is not None:
         nlp = spacy.blank("en")
         db = DocBin()
+        if data_end_pt == -1:
+            data_end_pt = len(data)
         for text, annotations in tqdm(data[data_start_pt:data_end_pt]):
             doc = nlp.make_doc(text)
             ents = []

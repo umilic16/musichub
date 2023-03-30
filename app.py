@@ -46,7 +46,7 @@ ir_model.load_model("intent_recognition/models", "intent_recognition")
 
 # Load the named entity recognition model
 ner_model = spacy.load(
-    "named_entity_recognition/models/v3.1/model-best")
+    "named_entity_recognition/models/v3.2/model-best")
 
 load_dotenv()
 youtube_api_key = os.getenv("YOUTUBE_API_KEY")
@@ -67,7 +67,7 @@ def generate_response(prompt):
     model="gpt-3.5-turbo",
     messages = messages,
     max_tokens=100,
-    temperature=0.5,
+    temperature=0.3,
     stream=True 
     )
     collected_messages = []
