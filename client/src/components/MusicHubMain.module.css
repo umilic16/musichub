@@ -1,0 +1,207 @@
+.main {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  justify-content: top;
+  padding: 15rem 1rem 1rem 1rem;
+  flex: 1 0 auto;
+  width: 80%;
+}
+
+.headingGroup {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+  font-size: 3.5rem;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  width: 100%;
+  letter-spacing: 0.02em;
+}
+
+.musichubContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  background: linear-gradient(90deg,
+      rgba(143, 17, 17, 0.521),
+      rgba(182, 14, 14, 0));
+  height: 100%;
+  overflow: hidden;
+  margin-left: 0.5rem;
+}
+
+.lineGradient {
+  filter: blur(2px);
+  border-right: 3px solid #650707;
+  height: 100%;
+}
+
+.baseline {
+  position: relative;
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 7vh;
+  margin: 2rem 0 0 0;
+}
+
+.button {
+  background-image: linear-gradient(to right bottom, #650707, rgb(146, 6, 6));
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 1rem;
+  color: white;
+  box-shadow: 1px 3px 5px #0000006c;
+  border: 0.5px solid rgba(136, 10, 10, 0.33);
+  border-radius: 10px;
+  display: block;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-image: linear-gradient(to left top, rgb(131, 8, 8), rgb(114, 4, 4));
+  font-size: 0.95rem;
+  box-shadow: 1px 1px 1px #0000006c;
+}
+
+
+@media only screen and (min-width: 200px) {
+  .content {
+    padding: 5rem 1rem 1rem 1rem;
+  }
+
+  .headingGroup {
+    font-size: 0.8rem;
+  }
+
+  .baseline {
+    font-size: 0.6rem;
+  }
+
+  .button {
+    font-size: 0.6rem;
+    padding: 0.6rem;
+  }
+
+  .button:hover {
+    font-size: 0.55rem;
+  }
+}
+
+@media only screen and (min-width: 300px) {
+  .headingGroup {
+    font-size: 1.3rem;
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  .headingGroup {
+    font-size: 1.7rem;
+  }
+
+  .baseline {
+    font-size: 0.875rem;
+  }
+
+  .button {
+    font-size: 0.8rem;
+    padding: 0.65rem;
+  }
+
+  .button:hover {
+    font-size: 0.75rem;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .headingGroup {
+    font-size: 2.2rem;
+  }
+
+  .baseline {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .content {
+    padding: 7rem 1rem 1rem 1rem;
+  }
+
+  .headingGroup {
+    font-size: 2.7rem;
+  }
+
+  .baseline {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .headingGroup {
+    font-size: 3rem;
+  }
+
+  .baseline {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .content {
+    padding: 15rem 1rem 1rem 1rem;
+  }
+
+  .headingGroup {
+    font-size: 4rem;
+  }
+
+  .button {
+    font-size: 1.2rem;
+    padding: 0.9rem;
+  }
+
+  .button:hover {
+    font-size: 1.15rem;
+  }
+}
+
+
+@media only screen and (min-width: 1200px) {
+  .headingGroup {
+    font-size: 5rem;
+  }
+
+  .baseline {
+    font-size: 1.4rem;
+  }
+}

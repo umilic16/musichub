@@ -1,0 +1,7 @@
+.functionalities {
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  flex: 1 0 auto;
+  width: 80%;
+}

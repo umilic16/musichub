@@ -1,0 +1,193 @@
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+.iconContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 auto;
+}
+
+.description {
+  font-size: 0.875rem;
+  text-align: center;
+  flex: 1 1 auto;
+
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  gap: 0.2rem;
+  flex: 1 1 auto;
+}
+
+.title {
+  font-weight: 600;
+  text-align: center;
+}
+
+.functionality {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  width: 20%;
+  margin: 0.5rem;
+}
+
+@media only screen and (min-width: 200px) {
+  .functionality {
+    width: 40%;
+    margin: 0.2rem
+  }
+
+  .icon {
+    width: 15px;
+    height: 15px;
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 0.4rem;
+  }
+
+  .description {
+    font-size: 0.35rem;
+    font-weight: 350;
+  }
+}
+
+@media only screen and (min-width: 300px) {
+  .title {
+    font-size: 0.45rem;
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  .functionality {
+    width: 35%;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .title {
+    font-size: 0.5rem;
+  }
+
+  .description {
+    font-size: 0.375rem;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .functionality {
+    width: 27.5%;
+  }
+
+  .title {
+    font-weight: 550;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .functionality {
+    width: 25%;
+  }
+
+  .icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .title {
+    font-size: 0.65rem;
+  }
+
+  .description {
+    font-size: 0.5rem;
+    font-weight: 375;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .title {
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  .description {
+    font-size: 0.55rem;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  .description {
+    font-weight: 400;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .functionality {
+    width: 22%;
+    margin: 0.35rem;
+  }
+
+  .title {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 0.75rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .functionality {
+    width: 20%;
+    margin: 0.5rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .functionality {
+    width: 17.5%;
+    margin: 0.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+}
