@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import os
 from flask_cors import CORS
 
+
 def named_entity_recoqnition(message):
     doc = ner_model(message)
     return doc.ents
@@ -26,7 +27,7 @@ def play_music(message):
         entities = ' '.join(str(ent) for ent in entities)
     link = search_youtube(entities)
     if link is not None:
-        return {"type": "link", "data": link}
+        return {"type": "link", "data": entities, "link": link}
     else:
         return {"type": "data", "data": "Sorry, I could not find that song on YouTube."}
 
@@ -50,8 +51,10 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 youtube = build("youtube", "v3", developerKey=youtube_api_key)
 
-messages = [{"role": "system", "content": "You are an AI music assistant named MusicHub, an expert for music knowledge. You know everything about music (musicians, artists, songs, albums, composers, genres, instruments everything music-related), and you are designed to answer any music-related questions users may have. If the question is not music-related, you will respond with a message indicating that you are unable to provide a response."}]
-# Function to generate a response from OpenAI API
+messages = [{"role": "system",
+             "content": "You are an AI music assistant named MusicHub, an expert for music knowledge. You know everything about music (musicians, artists, songs, albums, composers, genres, instruments everything music-related), and you are designed to answer any music-related questions users may have. If the question is not music-related, you will respond with a message indicating that you are unable to provide a response."}]
+
+
 def generate_response(prompt):
     """
     This function takes in a music related topic as input and returns
@@ -59,24 +62,15 @@ def generate_response(prompt):
     """
     messages.append({"role": "user", "content": prompt})
     response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages = messages,
-    max_tokens=100,
-    temperature=0.3,
-    stream=True 
-    )
-    collected_messages = []
-    # iterate through the stream of events
-    for chunk in response:
-        chunk_message = chunk['choices'][0]['delta']  # extract the message
-        collected_messages.append(chunk_message)  # save the message
-
-    full_reply_content = ''.join([m.get('content', '') for m in collected_messages])
-    messages.append({"role": "assistant", "content": full_reply_content})
-    return {"type": "data", "data": full_reply_content}
+        model="gpt-3.5-turbo",
+        messages=messages,
+        max_tokens=500,
+        temperature=0.3,
+    )["choices"][0]["message"]["content"]
+    messages.append({"role": "assistant", "content": response})
+    return {"type": "data", "data": response}
 
 
-# Function to search for a song on YouTube and return a link
 def search_youtube(query):
     """
     This function takes in a song name as input and, searches youtube and returns the song
@@ -96,8 +90,6 @@ def search_youtube(query):
         return None
 
 # Endpoint for handling all requests
-
-
 @app.route("/", methods=["POST"])
 def handle_request():
     # Get the user input from the JSON payload

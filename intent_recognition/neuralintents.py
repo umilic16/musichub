@@ -193,7 +193,7 @@ class GenericAssistant():
     def request(self, message):
         ints = self._predict_class(message)
         if (ints):
-            print(ints[0]['intent'])
+            # print(ints[0]['intent'])
             if ints[0]['intent'] in self.intent_methods.keys():
                 return self.intent_methods[ints[0]['intent']](message)
             else:

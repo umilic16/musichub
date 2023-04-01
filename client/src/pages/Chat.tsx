@@ -30,7 +30,6 @@ const Chat: FunctionComponent = () => {
 
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setIsRequestPending(true);
-
       fetch('http://127.0.0.1:5000', {
         method: 'POST',
         body: JSON.stringify({ message: inputValue }),
@@ -38,11 +37,18 @@ const Chat: FunctionComponent = () => {
       })
         .then((response) => response.json())
         .then((data) => {
+          let text = data.response.data;
+          if (data.response.type !== 'data') {
+            text = 'Playing ' + text + " ♬";
+          }
           const newResponse: MessageType = {
             user: 'assistant',
-            text: data.response.data,
+            text: text,
           };
           setMessages((prevMessages) => [...prevMessages, newResponse]);
+          if (data.response.type === "link") {
+            window.open(data.response.link)
+          }
           setIsRequestPending(false);
         })
         .catch((error) => {
