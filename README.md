@@ -1,5 +1,7 @@
 # MusicHub
 
+readme not finished
+
 **MusicHub** is an AI virtual assistant that processes user input using **NLP** (natural language processing) techniques and is able to answer to music related questions, and play music. It uses **machine learning** models to understand the intent behind users input and extract relevant entities. If the user asks a music related question, it will answer it. If the users wants to play music, it will play music. After the IVA understands the user intent, it sends a request to **OpenAI API** for data and **YouTube API** for music. The machine learning logic is built using python, the API using **Flask**, and the front end using **React**.
 
 ## Installation
