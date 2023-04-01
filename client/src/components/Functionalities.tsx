@@ -1,21 +1,21 @@
 import { FunctionComponent } from "react";
-import FunctionalityContainer from "./FunctionalityContainer";
-import styles from "./FunctionalitiesContainer.module.css";
+import Functionality from "./Functionality";
+import styles from "./Functionalities.module.css";
 
-const FunctionalitiesContainer: FunctionComponent = () => {
+const Functionalities: FunctionComponent = () => {
   return (
     <div className={styles.functionalities}>
-      <FunctionalityContainer
+      <Functionality
         title="Contextual awareness"
         description="Remembers what user said earlier in the conversation."
         icon="/conversation.png"
       />
-      <FunctionalityContainer
+      <Functionality
         title="Music knowledge"
         description="Provides accurate and informative responses to any music-related question."
         icon="/knowledge.png"
       />
-      <FunctionalityContainer
+      <Functionality
         title="Limited to youtube"
         description="Currently limited to playing music only from YouTube."
         icon="/youtube.png"
@@ -24,4 +24,4 @@ const FunctionalitiesContainer: FunctionComponent = () => {
   );
 };
 
-export default FunctionalitiesContainer;
+export default Functionalities;

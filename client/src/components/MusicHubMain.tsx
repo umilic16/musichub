@@ -1,9 +1,9 @@
 import { FunctionComponent, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import FunctionalitiesContainer from "./FunctionalitiesContainer";
+import Functionalities from "./Functionalities";
 import styles from "./MusicHubMain.module.css";
 
-const MusicHubCard: FunctionComponent = () => {
+const MusicHubMain: FunctionComponent = () => {
   const navigate = useNavigate();
 
   const onButtonClick = useCallback(() => {
@@ -35,9 +35,9 @@ const MusicHubCard: FunctionComponent = () => {
           </div>
         </div>
       </div>
-      <FunctionalitiesContainer />
+      <Functionalities />
     </div>
   );
 };
 
-export default MusicHubCard;
+export default MusicHubMain;

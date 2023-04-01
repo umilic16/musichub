@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 6rem;
 }
 
 .content {
@@ -13,7 +13,7 @@
   flex-direction: column;
   align-items: top;
   justify-content: top;
-  padding: 15rem 1rem 1rem 1rem;
+  padding: 12rem 1rem 1rem 1rem;
   flex: 1 0 auto;
   width: 80%;
 }
@@ -75,20 +75,23 @@
 }
 
 .button {
-  background-image: linear-gradient(to right bottom, #650707, rgb(146, 6, 6));
-  padding: 0.75rem;
+  display: block;
   text-align: center;
+  padding: 0.75rem;
   font-size: 1rem;
+  background-image: linear-gradient(to right bottom, #660000, rgba(185, 0, 0, 0.774));
   color: white;
   box-shadow: 1px 3px 5px #0000006c;
   border: 0.5px solid rgba(136, 10, 10, 0.33);
   border-radius: 10px;
-  display: block;
   cursor: pointer;
 }
 
 .button:hover {
-  background-image: linear-gradient(to left top, rgb(131, 8, 8), rgb(114, 4, 4));
+  background-image: linear-gradient(to right bottom, #500707, rgba(150, 1, 1, 0.774));
+}
+
+.button:active {
   font-size: 0.95rem;
   box-shadow: 1px 1px 1px #0000006c;
 }
@@ -96,7 +99,7 @@
 
 @media only screen and (min-width: 200px) {
   .content {
-    padding: 5rem 1rem 1rem 1rem;
+    padding-top: 5rem;
   }
 
   .headingGroup {
@@ -112,7 +115,7 @@
     padding: 0.6rem;
   }
 
-  .button:hover {
+  .button:active {
     font-size: 0.55rem;
   }
 }
@@ -137,7 +140,7 @@
     padding: 0.65rem;
   }
 
-  .button:hover {
+  .button:active {
     font-size: 0.75rem;
   }
 }
@@ -154,7 +157,7 @@
 
 @media only screen and (min-width: 600px) {
   .content {
-    padding: 7rem 1rem 1rem 1rem;
+    padding-top: 7rem;
   }
 
   .headingGroup {
@@ -178,7 +181,7 @@
 
 @media only screen and (min-width: 1000px) {
   .content {
-    padding: 15rem 1rem 1rem 1rem;
+    padding-top: 10rem;
   }
 
   .headingGroup {
@@ -190,11 +193,10 @@
     padding: 0.9rem;
   }
 
-  .button:hover {
-    font-size: 1.15rem;
+  .button:active {
+    font-size: 1.1rem;
   }
 }
-
 
 @media only screen and (min-width: 1200px) {
   .headingGroup {

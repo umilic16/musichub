@@ -172,7 +172,6 @@ class GenericAssistant():
         ERROR_THRESHOLD = 0.51
         results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
         results.sort(key=lambda x: x[1], reverse=True)
-        # print(results)
         return_list = []
         for r in results:
             return_list.append(
@@ -193,9 +192,9 @@ class GenericAssistant():
 
     def request(self, message):
         ints = self._predict_class(message)
-        # print(ints)
         if (ints):
+            print(ints[0]['intent'])
             if ints[0]['intent'] in self.intent_methods.keys():
                 return self.intent_methods[ints[0]['intent']](message)
             else:
-                return self._get_response(ints, self.responses)
+                return {"type": "data", "data": self._get_response(ints, self.responses)}

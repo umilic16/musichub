@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import MusicHubCard from "../components/MusicHubMain";
+import MusicHubMain from "../components/MusicHubMain";
 import styles from "./Home.module.css";
 
 const Home: FunctionComponent = () => {
@@ -9,7 +9,7 @@ const Home: FunctionComponent = () => {
         <div className={styles.gradient}>
         </div>
       </div>
-      <MusicHubCard />
+      <MusicHubMain />
     </div>
   );
 };

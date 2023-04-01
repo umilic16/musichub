@@ -5,7 +5,7 @@ import openai
 from googleapiclient.discovery import build
 from dotenv import load_dotenv
 import os
-
+from flask_cors import CORS
 
 def named_entity_recoqnition(message):
     doc = ner_model(message)
@@ -14,29 +14,25 @@ def named_entity_recoqnition(message):
 
 def request_data(message):
     response = generate_response(message)
-    print("requested data")
     return response
 
 
 def play_music(message):
     entities = named_entity_recoqnition(message)
-    print(entities)
     if len(entities) == 0:
         # TO DO - Handle when no entities are found in user's input
         pass
     else:
         entities = ' '.join(str(ent) for ent in entities)
-    print(entities)
     link = search_youtube(entities)
     if link is not None:
-        print(f"Playing {entities}: {link}")
+        return {"type": "link", "data": link}
     else:
-        print("Sorry, I could not find that song on YouTube.")
-
-    return "Playing music"
+        return {"type": "data", "data": "Sorry, I could not find that song on YouTube."}
 
 
 app = Flask(__name__)
+CORS(app)
 
 # Load the intent recognition model
 mappings = {"request_data": request_data, "play_music": play_music}
@@ -62,7 +58,6 @@ def generate_response(prompt):
     information about that topic using the OpenAI API.
     """
     messages.append({"role": "user", "content": prompt})
-    print(messages)
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
     messages = messages,
@@ -78,7 +73,7 @@ def generate_response(prompt):
 
     full_reply_content = ''.join([m.get('content', '') for m in collected_messages])
     messages.append({"role": "assistant", "content": full_reply_content})
-    return full_reply_content
+    return {"type": "data", "data": full_reply_content}
 
 
 # Function to search for a song on YouTube and return a link
@@ -106,7 +101,7 @@ def search_youtube(query):
 @app.route("/", methods=["POST"])
 def handle_request():
     # Get the user input from the JSON payload
-    user_input = request.json.get("input")
+    user_input = request.json.get("message")
     # Use intent recognition model to determine user"s intent
     response = ir_model.request(user_input)
     # Return the response to the user as a JSON object

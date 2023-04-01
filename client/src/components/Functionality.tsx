@@ -1,13 +1,13 @@
 import { FunctionComponent } from "react";
-import styles from "./FunctionalityContainer.module.css";
+import styles from "./Functionality.module.css";
 
-type FunctionalityContainerType = {
+type FunctionalityType = {
   title?: string;
   description?: string;
   icon?: string;
 };
 
-const FunctionalityContainer: FunctionComponent<FunctionalityContainerType> = ({
+const Functionality: FunctionComponent<FunctionalityType> = ({
   title,
   description,
   icon
@@ -29,4 +29,4 @@ const FunctionalityContainer: FunctionComponent<FunctionalityContainerType> = ({
   );
 };
 
-export default FunctionalityContainer;
+export default Functionality;
