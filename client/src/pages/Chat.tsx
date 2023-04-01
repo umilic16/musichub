@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useState } from "react";
+import { FunctionComponent, useRef, useState, useEffect } from "react";
 import Message from "../components/Message";
 import React from 'react';
 import styles from "./Chat.module.css";
@@ -12,40 +12,48 @@ const Chat: FunctionComponent = () => {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isRequestPending, setIsRequestPending] = useState(false);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (chatContainerRef.current !== null) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
+  
 
   const handleSendMessage = () => {
-    if (inputValue.trim() !== '' && !isRequestPending) { // check if a request is not already pending
+    if (inputValue.trim() !== '' && !isRequestPending) {
       const newMessage: MessageType = {
         user: 'user',
         text: inputValue,
       };
-  
+
       setMessages((prevMessages) => [...prevMessages, newMessage]);
-      setIsRequestPending(true); // mark a new request as pending
+      setIsRequestPending(true);
 
       fetch('http://127.0.0.1:5000', {
         method: 'POST',
         body: JSON.stringify({ message: inputValue }),
         headers: { 'Content-Type': 'application/json' },
       })
-      .then((response) => response.json())
-      .then((data) => {
-        const newResponse: MessageType = {
-          user: 'assistant',
-          text: data.response.data,
-        };
-        setMessages((prevMessages) => [...prevMessages, newResponse]);
-        setIsRequestPending(false); // mark the request as completed
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        setIsRequestPending(false); // mark the request as completed (even in case of an error)
-      });
-      
+        .then((response) => response.json())
+        .then((data) => {
+          const newResponse: MessageType = {
+            user: 'assistant',
+            text: data.response.data,
+          };
+          setMessages((prevMessages) => [...prevMessages, newResponse]);
+          setIsRequestPending(false);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          setIsRequestPending(false);
+        });
+
       setInputValue('');
     }
   };
-  
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -62,7 +70,7 @@ const Chat: FunctionComponent = () => {
         <div className={styles.gradient}></div>
       </div>
       <div className={styles.chat}>
-        <div className={styles.chatBox}>
+        <div className={styles.chatBox} ref={chatContainerRef}>
           {messages.map((message, index) => (
             <Message key={index} user={message.user} text={message.text} />
           ))}
@@ -79,7 +87,11 @@ const Chat: FunctionComponent = () => {
               onKeyDown={handleInputKeyPress}
             />
             <button className={styles.button} onClick={handleSendMessage}>
-              <img className={styles.icon} alt="" src="/send.png" />
+              {isRequestPending ? (
+                <img className={styles.icon} src="/loading.gif" alt="Loading..." />
+              ) : (
+                <img className={styles.icon} src="/send.png" alt="Send" />
+              )}
             </button>
           </div>
         </div>
