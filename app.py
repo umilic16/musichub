@@ -8,10 +8,12 @@ import os
 from flask_cors import CORS
 
 
+messages = [{"role": "system",
+             "content": "You are an AI music assistant named MusicHub, an expert for music knowledge. You know everything about music (musicians, artists, songs, albums, composers, genres, instruments everything music-related), and you are designed to answer any music-related questions users may have. You will not respond to any none music-related questions, in that case just say that you are unable to provide a response and nothing else."}]
+
 def named_entity_recoqnition(message):
     doc = ner_model(message)
     return doc.ents
-
 
 def request_data(message):
     response = generate_response(message)
@@ -27,6 +29,7 @@ def play_music(message):
         entities = ' '.join(str(ent) for ent in entities)
     link = search_youtube(entities)
     if link is not None:
+        messages.append({"role": "user", "content": entities})
         return {"type": "link", "data": entities, "link": link}
     else:
         return {"type": "data", "data": "Sorry, I could not find that song on YouTube."}
@@ -51,8 +54,6 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 youtube = build("youtube", "v3", developerKey=youtube_api_key)
 
-messages = [{"role": "system",
-             "content": "You are an AI music assistant named MusicHub, an expert for music knowledge. You know everything about music (musicians, artists, songs, albums, composers, genres, instruments everything music-related), and you are designed to answer any music-related questions users may have. You will not respond to any none music-related questions, in that case just say that you are unable to provide a response and nothing else."}]
 
 
 def generate_response(prompt):
@@ -68,6 +69,7 @@ def generate_response(prompt):
         temperature=0.5,
     )["choices"][0]["message"]["content"]
     messages.append({"role": "assistant", "content": response})
+    print(messages)
     return {"type": "data", "data": response}
 
 
