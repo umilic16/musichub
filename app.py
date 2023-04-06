@@ -69,7 +69,7 @@ def generate_response(prompt):
         temperature=0.5,
     )["choices"][0]["message"]["content"]
     messages.append({"role": "assistant", "content": response})
-    print(messages)
+    # print(messages)
     return {"type": "data", "data": response}
 
 
