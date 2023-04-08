@@ -38,17 +38,15 @@ const Chat: FunctionComponent = () => {
         .then((response) => response.json())
         .then((data) => {
           let text = data.response.data;
-          if (data.response.type !== 'data') {
+          if (data.response.type === "link") {
             text = 'Playing ' + text + " ♬";
+            window.open(data.response.link)
           }
           const newResponse: MessageType = {
             user: 'assistant',
             text: text,
           };
           setMessages((prevMessages) => [...prevMessages, newResponse]);
-          if (data.response.type === "link") {
-            window.open(data.response.link)
-          }
           setIsRequestPending(false);
         })
         .catch((error) => {

@@ -11,9 +11,11 @@ from flask_cors import CORS
 messages = [{"role": "system",
              "content": "You are an AI music assistant named MusicHub, an expert for music knowledge. You know everything about music (musicians, artists, songs, albums, composers, genres, instruments everything music-related), and you are designed to answer any music-related questions users may have. You will not respond to any none music-related questions, in that case just say that you are unable to provide a response and nothing else."}]
 
+
 def named_entity_recoqnition(message):
     doc = ner_model(message)
     return doc.ents
+
 
 def request_data(message):
     response = generate_response(message)
@@ -55,7 +57,6 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 youtube = build("youtube", "v3", developerKey=youtube_api_key)
 
 
-
 def generate_response(prompt):
     """
     This function takes in a music related topic as input and returns
@@ -92,6 +93,8 @@ def search_youtube(query):
         return None
 
 # Endpoint for handling all requests
+
+
 @app.route("/", methods=["POST"])
 def handle_request():
     # Get the user input from the JSON payload
