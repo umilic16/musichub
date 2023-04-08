@@ -85,11 +85,11 @@ youtube = build("youtube", "v3", developerKey=youtube_api_key)
 
 @app.route("/", methods=["POST"])
 def handle_request():
-    # Get the user input from the JSON payload
+    """
+    This function handles the request from the frontend, calls the intent recognition model and returns the response.
+    """
     user_input = request.json.get("message")
-    # Use intent recognition model to determine user"s intent
     response = ir_model.request(user_input)
-    # Return the response to the user as a JSON object
     return jsonify({"response": response})
 
 
