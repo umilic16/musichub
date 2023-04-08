@@ -12,18 +12,8 @@ messages = [{"role": "system",
              "content": "You are an AI music assistant named MusicHub, an expert for music knowledge. You know everything about music (musicians, artists, songs, albums, composers, genres, instruments everything music-related), and you are designed to answer any music-related questions users may have. You will not respond to any none music-related questions, in that case just say that you are unable to provide a response and nothing else."}]
 
 
-def named_entity_recoqnition(message):
-    doc = ner_model(message)
-    return doc.ents
-
-
-def request_data(message):
-    response = generate_response(message)
-    return response
-
-
 def play_music(message):
-    entities = named_entity_recoqnition(message)
+    entities = ner_model(message).ents
     if len(entities) == 0:
         # TO DO - Handle when no entities are found in user's input
         pass
@@ -37,27 +27,7 @@ def play_music(message):
         return {"type": "data", "data": "Sorry, I could not find that song on YouTube."}
 
 
-app = Flask(__name__)
-CORS(app)
-
-# Load the intent recognition model
-mappings = {"request_data": request_data, "play_music": play_music}
-ir_model = GenericAssistant(intent_methods=mappings, model_name="intent_recognition",
-                            responses="intent_recognition/data/responses.json")
-ir_model.load_model("intent_recognition/models", "intent_recognition")
-
-# Load the named entity recognition model
-ner_model = spacy.load(
-    "named_entity_recognition/models/v3.2/model-best")
-
-load_dotenv()
-youtube_api_key = os.getenv("YOUTUBE_API_KEY")
-openai.api_key = os.getenv("OPENAI_API_KEY")
-
-youtube = build("youtube", "v3", developerKey=youtube_api_key)
-
-
-def generate_response(prompt):
+def request_data(prompt):
     """
     This function takes in a music related topic as input and returns
     information about that topic using the OpenAI API.
@@ -92,7 +62,25 @@ def search_youtube(query):
     else:
         return None
 
-# Endpoint for handling all requests
+
+app = Flask(__name__)
+CORS(app)
+
+# Load the intent recognition model
+mappings = {"request_data": request_data, "play_music": play_music}
+ir_model = GenericAssistant(intent_methods=mappings, model_name="intent_recognition",
+                            responses="intent_recognition/data/responses.json")
+ir_model.load_model("intent_recognition/models", "intent_recognition")
+
+# Load the named entity recognition model
+ner_model = spacy.load(
+    "named_entity_recognition/models/v3.2/model-best")
+
+load_dotenv()
+youtube_api_key = os.getenv("YOUTUBE_API_KEY")
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+youtube = build("youtube", "v3", developerKey=youtube_api_key)
 
 
 @app.route("/", methods=["POST"])
